@@ -1,5 +1,6 @@
 package com.lft.miaosha.service.impl;
 
+import com.lft.miaosha.common.exception.ExceptionCode;
 import com.lft.miaosha.common.result.ResultCode;
 import com.lft.miaosha.common.util.Md5Util;
 import com.lft.miaosha.common.util.RandomSaltUtil;
@@ -7,6 +8,7 @@ import com.lft.miaosha.dao.MiaoshaUserMapper;
 import com.lft.miaosha.entity.dto.LoginDto;
 import com.lft.miaosha.entity.dto.RegisterDto;
 import com.lft.miaosha.entity.po.MiaoshaUser;
+import com.lft.miaosha.exception.MsException;
 import com.lft.miaosha.service.MiaoshaUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,7 +62,7 @@ public class MiaoshaUserServiceImpl implements MiaoshaUserService {
     @Override
     public ResultCode register(RegisterDto registerDto) {
         if (registerDto == null) {
-            return ResultCode.REGISTER_ERROR;
+            throw new MsException(ExceptionCode.NULL_OBJECT_EXCEPTION);
         }
         String mobile = registerDto.getMobile();
         String nickname = registerDto.getNickname();
@@ -69,7 +71,7 @@ public class MiaoshaUserServiceImpl implements MiaoshaUserService {
         // 判断手机号是否存在
         MiaoshaUser miaoshaUserFromDb = getUserById(Long.parseLong(mobile));
         if (miaoshaUserFromDb != null) {
-            return ResultCode.MOBILE_FOUND_ERROR;
+            throw new MsException(ExceptionCode.NULL_OBJECT_EXCEPTION);
         }
         
         String randomSalt = RandomSaltUtil.getRandomSalt();

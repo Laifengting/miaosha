@@ -1,6 +1,7 @@
 package com.lft.miaosha.common.key.impl;
 
 import com.lft.miaosha.common.constant.RedisConstants;
+import com.lft.miaosha.common.key.ExpireSeconds;
 
 /**
  * Class Name:      OrderKeyPrefix
@@ -14,11 +15,12 @@ import com.lft.miaosha.common.constant.RedisConstants;
  * @since JDK 8
  */
 public class OrderKeyPrefix extends BaseKeyPrefix {
-    public static OrderKeyPrefix ORDER_ID_KEY = new OrderKeyPrefix(RedisConstants.ORDER_ID);
-    public static OrderKeyPrefix NAME_KEY = new OrderKeyPrefix(RedisConstants.NAME);
-    public static OrderKeyPrefix PHONE_KEY = new OrderKeyPrefix(RedisConstants.PHONE);
-    public static OrderKeyPrefix ADDRESS_KEY = new OrderKeyPrefix(RedisConstants.ADDRESS);
-    public static OrderKeyPrefix DATE_KEY = new OrderKeyPrefix(RedisConstants.DATE);
+    // 过期时间是7天
+    public static OrderKeyPrefix ORDER_ID_KEY = new OrderKeyPrefix(ExpireSeconds.WEEK, RedisConstants.ORDER_ID);
+    public static OrderKeyPrefix NAME_KEY = new OrderKeyPrefix(ExpireSeconds.WEEK,RedisConstants.NAME);
+    public static OrderKeyPrefix PHONE_KEY = new OrderKeyPrefix(ExpireSeconds.WEEK,RedisConstants.PHONE);
+    public static OrderKeyPrefix ADDRESS_KEY = new OrderKeyPrefix(ExpireSeconds.WEEK,RedisConstants.ADDRESS);
+    public static OrderKeyPrefix DATE_KEY = new OrderKeyPrefix(ExpireSeconds.WEEK,RedisConstants.DATE);
     public OrderKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);
     }

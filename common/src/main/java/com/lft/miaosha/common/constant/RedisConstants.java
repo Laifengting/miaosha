@@ -70,6 +70,10 @@ public class RedisConstants {
      */
     public static final String DATE = "date";
     /**
+     * token
+     */
+    public static final String TOKEN = "token";
+    /**
      * 订单号
      */
     public static final String ORDER_ID = "order:id";

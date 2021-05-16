@@ -19,8 +19,8 @@ public abstract class BaseKeyPrefix implements KeyPrefix {
     private String prefix;
     
     public BaseKeyPrefix(String prefix) {
-        // 默认 -1 代表永不过期
-        this(-1, prefix);
+        // 默认 -2 代表永不过期
+        this(-2, prefix);
     }
     
     public BaseKeyPrefix(Integer expireSeconds, String prefix) {
@@ -44,7 +44,7 @@ public abstract class BaseKeyPrefix implements KeyPrefix {
      */
     @Override
     public Integer expireSeconds() {
-        // 默认 -1 代表永不过期
+        // 默认 -2 代表永不过期
         return expireSeconds;
     }
 }

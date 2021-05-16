@@ -1,6 +1,7 @@
 package com.lft.miaosha.common.key.impl;
 
 import com.lft.miaosha.common.constant.RedisConstants;
+import com.lft.miaosha.common.key.ExpireSeconds;
 
 /**
  * Class Name:      UserKeyPrefix
@@ -14,13 +15,16 @@ import com.lft.miaosha.common.constant.RedisConstants;
  * @since JDK 8
  */
 public class UserKeyPrefix extends BaseKeyPrefix {
-    public static UserKeyPrefix ID_KEY = new UserKeyPrefix(RedisConstants.ID);
-    public static UserKeyPrefix NAME_KEY = new UserKeyPrefix(RedisConstants.NAME);
-    public static UserKeyPrefix PHONE_KEY = new UserKeyPrefix(RedisConstants.PHONE);
-    public static UserKeyPrefix DATE_KEY = new UserKeyPrefix(RedisConstants.DATE);
+    // 过期时间是7天
+    public static UserKeyPrefix ID_KEY = new UserKeyPrefix(ExpireSeconds.WEEK, RedisConstants.ID);
+    public static UserKeyPrefix NAME_KEY = new UserKeyPrefix(ExpireSeconds.WEEK, RedisConstants.NAME);
+    public static UserKeyPrefix PHONE_KEY = new UserKeyPrefix(ExpireSeconds.WEEK, RedisConstants.PHONE);
+    public static UserKeyPrefix DATE_KEY = new UserKeyPrefix(ExpireSeconds.WEEK, RedisConstants.DATE);
+    
     private UserKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);
     }
+    
     private UserKeyPrefix(String prefix) {
         super(prefix);
     }

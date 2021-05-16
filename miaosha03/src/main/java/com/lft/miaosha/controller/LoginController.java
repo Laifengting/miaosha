@@ -2,16 +2,16 @@ package com.lft.miaosha.controller;
 
 import com.lft.miaosha.common.result.R;
 import com.lft.miaosha.common.result.ResultCode;
-import com.lft.miaosha.common.util.ValidatorUtil;
 import com.lft.miaosha.entity.dto.LoginDto;
 import com.lft.miaosha.service.MiaoshaUserService;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.Valid;
 
 /**
  * Class Name:      LoginController
@@ -39,20 +39,11 @@ public class LoginController {
     
     @RequestMapping ("do/login")
     @ResponseBody
-    public R doLogin(LoginDto loginDto) {
+    public R doLogin(@Valid LoginDto loginDto) {
         log.info(loginDto.toString());
         // 参数校验
         String password = loginDto.getPassword();
         String mobile = loginDto.getMobile();
-        if (StringUtils.isEmpty(password)) {
-            return R.ERROR().code(ResultCode.PASSWORD_EMPTY_ERROR.getCode()).message(ResultCode.PASSWORD_EMPTY_ERROR.getMessage());
-        }
-        if (StringUtils.isEmpty(mobile)) {
-            return R.ERROR().code(ResultCode.MOBILE_EMPTY_ERROR.getCode()).message(ResultCode.MOBILE_EMPTY_ERROR.getMessage());
-        }
-        if (!ValidatorUtil.isMobile(mobile)) {
-            return R.ERROR().code(ResultCode.MOBILE_ERROR.getCode()).message(ResultCode.MOBILE_ERROR.getMessage());
-        }
         // 登录
         ResultCode resultCode = miaoshaUserService.login(loginDto);
         if (resultCode.getCode() == 200100) {
