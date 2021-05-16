@@ -25,7 +25,8 @@ public enum ExceptionCode {
     USER_NOT_IN_CACHE_EXCEPTION(500809, "缓存中无数据或已过期"),
     UPDATE_LOGIN_COUNT_AND_LAST_LOGIN_TIME_EXCEPTION(500810, "更新登录次数和上次登录时间异常"),
     
-    
+    CREATE_ORDER_EXCEPTION(500811, "创建订单失败异常"),
+    CREATE_MIAOSHA_ORDER_EXCEPTION(500812, "创建秒杀订单失败异常"),
     
     ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION(500888, "数组索引越界异常");
     

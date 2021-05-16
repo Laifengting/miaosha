@@ -71,18 +71,31 @@ public enum ResultCode {
      * 密码错误
      */
     WRONG_PASSWORD_ERROR(500305, "密码错误"),
+    
     /**
      * 商品错误
      */
     PRODUCT_ERROR(500400, "商品错误"),
+    
     /**
      * 订单错误
      */
     ORDER_ERROR(500500, "订单错误"),
+    
     /**
      * 秒杀错误
      */
-    MIAOSHA_ERROR(500600, "秒杀错误");
+    MIAOSHA_ERROR(500600, "秒杀错误"),
+    
+    /**
+     * 重复下单错误
+     */
+    ORDER_REPEAT_ERROR(500601, "重复下单错误"),
+    
+    /**
+     * 秒杀错误
+     */
+    NO_STOCK_ERROR(500611, "库存不足错误");
     
     private Integer code;
     private String message;
