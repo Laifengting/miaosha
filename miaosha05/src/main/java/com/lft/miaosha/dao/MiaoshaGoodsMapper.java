@@ -4,6 +4,8 @@ import com.lft.miaosha.entity.po.MiaoshaGoods;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * Class Name:      MiaoshaUserMapper
  * Package Name:    com.lft.miaosha.dao
@@ -18,4 +20,12 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface MiaoshaGoodsMapper {
     MiaoshaGoods selectMiaoshaGoodsByGoodsId(@Param ("goodsId") Long goodsId);
+    
+    List<MiaoshaGoods> selectAllMiaoshaGoods();
+    
+    Integer insertMiaoshaGoods(MiaoshaGoods miaoshaGoods);
+    
+    Integer updateMiaoshaGoodsById(MiaoshaGoods miaoshaGoods);
+    
+    boolean deleteMiaoshaGoodsById(@Param ("id") Long id);
 }

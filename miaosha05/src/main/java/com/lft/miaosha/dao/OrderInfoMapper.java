@@ -20,4 +20,6 @@ public interface OrderInfoMapper {
     OrderInfo selectById(@Param ("orderId") Long orderId);
     
     Integer insert(OrderInfo orderInfo);
+    
+    Integer updateOrder(OrderInfo orderInfo);
 }

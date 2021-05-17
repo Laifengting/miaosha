@@ -13,7 +13,8 @@ CREATE TABLE goods (
 	goods_detail LONGTEXT       DEFAULT NULL COMMENT '商品详情',
 	goods_price  DECIMAL(20, 2) DEFAULT NULL COMMENT '商品单价,保留两位小数',
 	goods_stock  INT(11)        DEFAULT NULL COMMENT '商品库存,-1表示没有限制',
-	gmt_created  DATETIME       DEFAULT NOW() COMMENT '创建时间',
+	gmt_created  DATETIME       DEFAULT NULL COMMENT '创建时间',
+	gmt_modified DATETIME       DEFAULT NULL COMMENT '修改时间',
 	PRIMARY KEY (id)
 )
 	ENGINE = InnoDB

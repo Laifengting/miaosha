@@ -12,7 +12,8 @@ CREATE TABLE miaosha_goods (
 	stock_count   INT(11)        DEFAULT NULL COMMENT '库存数量',
 	start_date    DATETIME       DEFAULT NULL COMMENT '秒杀开始时间',
 	end_date      DATETIME       DEFAULT NULL COMMENT '秒杀结束时间',
-	gmt_created   DATETIME       DEFAULT NOW() COMMENT '创建时间',
+	gmt_created   DATETIME       DEFAULT NULL COMMENT '创建时间',
+	gmt_modified  DATETIME       DEFAULT NULL COMMENT '修改时间',
 	PRIMARY KEY (id)
 )
 	ENGINE = InnoDB
@@ -24,5 +25,5 @@ CREATE TABLE miaosha_goods (
 # 插入测试数据
 INSERT INTO miaosha_goods(goods_id, miaosha_price, stock_count, start_date, end_date)
 	VALUES (1, 9.9, 100, "2021-05-16 20:00:00", "2021-05-16 22:00:00"),
-		   (2, 19.9, 100, "2021-05-16 20:00:00", "2021-05-16 22:00:00"),
-		   (3, 29.9, 100, "2021-05-16 20:00:00", "2021-05-16 22:00:00");
+		   (2, 19.9, 100, "2021-05-17 02:00:00", "2021-05-17 23:59:59"),
+		   (3, 29.9, 100, "2021-05-18 20:00:00", "2021-05-18 22:00:00");

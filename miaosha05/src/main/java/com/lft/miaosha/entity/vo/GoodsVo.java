@@ -22,30 +22,6 @@ public class GoodsVo extends Goods {
     private Date startDate;
     private Date endDate;
     
-    public GoodsVo() {
-    }
-    
-    public GoodsVo(Long id, String goodsName, String goodsTitle, String goodsImage, String goodsDetail, BigDecimal goodsPrice,
-                   Integer goodsStock, Date gmtCreated) {
-        super(id, goodsName, goodsTitle, goodsImage, goodsDetail, goodsPrice, goodsStock, gmtCreated);
-    }
-    
-    public GoodsVo(BigDecimal miaoshaPrice, Integer stockCount, Date startDate, Date endDate) {
-        this.miaoshaPrice = miaoshaPrice;
-        this.stockCount = stockCount;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-    
-    public GoodsVo(Long id, String goodsName, String goodsTitle, String goodsImage, String goodsDetail, BigDecimal goodsPrice,
-                   Integer goodsStock, Date gmtCreated, BigDecimal miaoshaPrice, Integer stockCount, Date startDate, Date endDate) {
-        super(id, goodsName, goodsTitle, goodsImage, goodsDetail, goodsPrice, goodsStock, gmtCreated);
-        this.miaoshaPrice = miaoshaPrice;
-        this.stockCount = stockCount;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-    
     public BigDecimal getMiaoshaPrice() {
         return miaoshaPrice;
     }

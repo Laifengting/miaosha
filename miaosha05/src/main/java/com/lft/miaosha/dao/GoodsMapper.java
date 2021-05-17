@@ -3,6 +3,7 @@ package com.lft.miaosha.dao;
 import com.lft.miaosha.entity.po.Goods;
 import com.lft.miaosha.entity.vo.GoodsVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,5 +23,11 @@ public interface GoodsMapper {
     List<GoodsVo> selectAllGoodsVo();
     
     GoodsVo selectGoodsVoByGoodsId(Long goodsId);
+    
+    Integer insertGoods(Goods goods);
+    
+    Integer updateGoods(Goods goods);
+    
+    Boolean deleteGoodsById(@Param ("goodsId") Long goodsId);
     
 }

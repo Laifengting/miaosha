@@ -36,4 +36,13 @@
                     #{status},
                     #{gmtCreated})
     </insert>
+
+    <!-- Integer updateOrder(OrderInfo orderInfo); -->
+    <update id = "updateOrder">
+        UPDATE order_info
+        SET
+            status  = 1,
+            gmt_pay = #{gmtPay}
+            WHERE status = 0 AND id = #{id}
+    </update>
 </mapper>

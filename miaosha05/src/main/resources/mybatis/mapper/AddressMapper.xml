@@ -18,4 +18,29 @@
             FROM address
             WHERE user_id = #{userId} AND id = #{addressId}
     </select>
+
+    <!-- Integer insertAddress(Address address); -->
+    <insert id = "insertAddress"
+            useGeneratedKeys = "true"
+            keyProperty = "id"
+            keyColumn = "id">
+        INSERT INTO address(user_id, address_detail, gmt_created)
+            VALUES (#{userId}, #{addressDetail}, #{gmtCreated})
+    </insert>
+
+    <!-- Integer updateAddressByIdAndUserId(Address address); -->
+    <update id = "updateAddressByIdAndUserId">
+        UPDATE address
+        SET
+            address_detail = #{addressDetail},
+            gmt_modified   = #{gmtModified}
+            WHERE id = #{id} AND user_id = #{userId}
+    </update>
+
+    <!-- Boolean deleteAddressById(@Param ("addressId") Long addressId); -->
+    <delete id = "deleteAddressById">
+        DELETE
+            FROM address
+            WHERE id = #{addressId}
+    </delete>
 </mapper>

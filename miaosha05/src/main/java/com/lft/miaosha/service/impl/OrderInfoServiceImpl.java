@@ -13,6 +13,7 @@ import com.lft.miaosha.service.OrderInfoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -37,6 +38,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     private AddressService addressService;
     
     @Override
+    @Transactional
     public OrderInfoVo addOrder(MiaoshaUser miaoshaUser, GoodsVo goodsVo) {
         if (miaoshaUser == null || goodsVo == null) {
             throw new MsException(ExceptionCode.ILLEGAL_ARGUMENT_EXCEPTION);
@@ -56,16 +58,16 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         Address address = addressService.getAllByUserId(orderInfo.getUserId()).get(0);
         orderInfo.setDeliveryAddressId(address.getId());
         
+        Integer result = orderInfoMapper.insert(orderInfo);
+        if (result < 0) {
+            throw new MsException(ExceptionCode.CREATE_ORDER_EXCEPTION);
+        }
+        
         // 增加详细地址信息
         OrderInfoVo orderInfoVo = new OrderInfoVo();
         BeanUtils.copyProperties(orderInfo, orderInfoVo);
         orderInfoVo.setName(address.getName());
         orderInfoVo.setAddressDetail(address.getAddressDetail());
-        
-        Integer result = orderInfoMapper.insert(orderInfo);
-        if (result < 0) {
-            throw new MsException(ExceptionCode.CREATE_ORDER_EXCEPTION);
-        }
         return orderInfoVo;
     }
 }

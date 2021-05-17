@@ -23,12 +23,13 @@ public class Goods {
     private BigDecimal goodsPrice;
     private Integer goodsStock;
     private Date gmtCreated;
+    private Date gmtModified;
     
     public Goods() {
     }
     
     public Goods(Long id, String goodsName, String goodsTitle, String goodsImage, String goodsDetail, BigDecimal goodsPrice,
-                 Integer goodsStock, Date gmtCreated) {
+                 Integer goodsStock, Date gmtCreated, Date gmtModified) {
         this.id = id;
         this.goodsName = goodsName;
         this.goodsTitle = goodsTitle;
@@ -37,6 +38,7 @@ public class Goods {
         this.goodsPrice = goodsPrice;
         this.goodsStock = goodsStock;
         this.gmtCreated = gmtCreated;
+        this.gmtModified = gmtModified;
     }
     
     public Long getId() {
@@ -103,6 +105,14 @@ public class Goods {
         this.gmtCreated = gmtCreated;
     }
     
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+    
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+    
     @Override
     public String toString() {
         return "Goods{" +
@@ -114,6 +124,7 @@ public class Goods {
                 ", goodsPrice=" + goodsPrice +
                 ", goodsStock=" + goodsStock +
                 ", gmtCreated=" + gmtCreated +
+                ", gmtModified=" + gmtModified +
                 '}';
     }
 }

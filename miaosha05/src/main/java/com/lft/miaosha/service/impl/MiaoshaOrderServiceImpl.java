@@ -73,7 +73,6 @@ public class MiaoshaOrderServiceImpl implements MiaoshaOrderService {
         MiaoshaOrder miaoshaOrder = new MiaoshaOrder();
         miaoshaOrder.setOrderId(orderInfoVo.getId());
         miaoshaOrder.setUserId(orderInfoVo.getUserId());
-        miaoshaOrder.setOrderId(orderInfoVo.getId());
         miaoshaOrder.setGoodsId(orderInfoVo.getGoodsId());
         miaoshaOrder.setGmtCreated(new Date());
         Integer result = miaoshaOrderMapper.addMiaoshaOrder(miaoshaOrder);

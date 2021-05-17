@@ -22,17 +22,22 @@ public class MiaoshaGoods {
     private Date startDate;
     private Date endDate;
     private Date gmtCreated;
+    private Date gmtModified;
     
-    public MiaoshaGoods() {
+    public BigDecimal getMiaoshaPrice() {
+        return miaoshaPrice;
     }
     
-    public MiaoshaGoods(Long id, Long goodsId, Integer stockCount, Date startDate, Date endDate, Date gmtCreated) {
-        this.id = id;
-        this.goodsId = goodsId;
-        this.stockCount = stockCount;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.gmtCreated = gmtCreated;
+    public void setMiaoshaPrice(BigDecimal miaoshaPrice) {
+        this.miaoshaPrice = miaoshaPrice;
+    }
+    
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+    
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
     }
     
     public Long getId() {

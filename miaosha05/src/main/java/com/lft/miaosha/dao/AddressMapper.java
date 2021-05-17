@@ -23,4 +23,10 @@ public interface AddressMapper {
     List<Address> selectAllByUserId(@Param ("userId") Long userId);
     
     Address selectAddressByUserIdAndAddressId(@Param ("userId") Long userId, @Param ("addressId") Long addressId);
+    
+    Integer insertAddress(Address address);
+    
+    Integer updateAddressByIdAndUserId(Address address);
+    
+    Boolean deleteAddressById(@Param ("addressId") Long addressId);
 }
