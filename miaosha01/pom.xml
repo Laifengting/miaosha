@@ -19,12 +19,6 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
     <dependencies>
-        <!-- 通用包依赖用于封装结果 -->
-        <dependency>
-            <groupId>com.lft.miaosha</groupId>
-            <artifactId>common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
         <!-- Spring Boot Web依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

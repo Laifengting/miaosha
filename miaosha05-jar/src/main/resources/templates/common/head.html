@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="UTF-8" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <footer th:fragment="common_head">
+            <!-- 公共头部代码 -->
+            <div th:if="${user eq null}">
+                <a href="/register/to/register">注册</a>
+                <a href="/login/to/login">登录</a>
+            </div>
+            <div th:if="${user ne null}">
+                <span th:text="${user.nickname}"></span>
+                <span th:text="${user.id}"></span>
+                <form id="headForm" method="post" action="/logout/to/logout" >
+                    <button class="btn btn-primary btn-block" type="submit" id="logout">退出</button>
+                </form>
+            </div>
+        </footer>
+    </head>
+</html>

@@ -10,12 +10,12 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <modules>
-        <module>common</module>
         <module>miaosha01</module>
         <module>miaosha02</module>
         <module>miaosha03</module>
         <module>miaosha04</module>
-        <module>miaosha05</module>
+        <module>miaosha05-jar</module>
+        <module>miaosha06-war</module>
     </modules>
     <groupId>com.lft</groupId>
     <artifactId>miaosha</artifactId>
@@ -30,14 +30,4 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>
