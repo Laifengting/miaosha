@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.lft.miaosha.dao.OrderInfoMapper">
+
+    <!-- OrderInfo selectById(@Param ("orderId") Long orderId); -->
+    <select id = "selectById"
+            resultType = "com.lft.miaosha.entity.po.OrderInfo">
+        SELECT *
+            FROM order_info
+            WHERE id = #{orderId}
+    </select>
+
+    <!-- Integer insert(OrderInfo orderInfo); -->
+    <insert id = "insert"
+            useGeneratedKeys = "true"
+            keyProperty = "id"
+            keyColumn = "id">
+        INSERT INTO order_info(user_id,
+                               goods_id,
+                               delivery_address_id,
+                               goods_name,
+                               goods_count,
+                               goods_price,
+                               order_channel,
+                               status,
+                               gmt_created)
+            VALUES (#{userId},
+                    #{goodsId},
+                    #{deliveryAddressId},
+                    #{goodsName},
+                    #{goodsCount},
+                    #{goodsPrice},
+                    #{orderChannel},
+                    #{status},
+                    #{gmtCreated})
+    </insert>
+
+    <!-- Integer updateOrder(OrderInfo orderInfo); -->
+    <update id = "updateOrder">
+        UPDATE order_info
+        SET
+            status  = 1,
+            gmt_pay = #{gmtPay}
+            WHERE status = 0 AND id = #{id}
+    </update>
+</mapper>
