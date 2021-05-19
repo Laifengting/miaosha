@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.lft.miaosha.dao.MiaoshaGoodsMapper">
+    <!-- MiaoshaGoods selectMiaoshaGoodsByGoodsId(Long goodsId); -->
+    <select id = "selectMiaoshaGoodsByGoodsId"
+            resultType = "com.lft.miaosha.entity.po.MiaoshaGoods">
+        SELECT *
+            FROM miaosha_goods
+            WHERE goods_id = #{goodsId}
+    </select>
+
+    <!-- List<MiaoshaGoods> selectAllMiaoshaGoods(); -->
+    <select id = "selectAllMiaoshaGoods"
+            resultType = "com.lft.miaosha.entity.po.MiaoshaGoods">
+        SELECT *
+            FROM miaosha_goods
+    </select>
+
+    <!-- Integer insertMiaoshaGoods(MiaoshaGoods miaoshaGoods); -->
+    <insert id = "insertMiaoshaGoods">
+        INSERT INTO miaosha_goods (goods_id, miaosha_price, stock_count, start_date, end_date, gmt_created)
+            VALUES (#{goodsId}, #{miaoshaPrice}, #{stockCount}, #{startDate}, #{endDate}, #{gmtCreated})
+    </insert>
+
+    <!-- Integer updateMiaoshaGoodsById(MiaoshaGoods miaoshaGoods); -->
+    <update id = "updateMiaoshaGoodsById">
+        UPDATE miaosha_goods
+        SET
+            goods_id      = #{goodsId},
+            miaosha_price = #{miaoshaPrice},
+            stock_count   = #{stockCount},
+            start_date    = #{startDate},
+            end_date      = #{endDate},
+            gmt_modified  = #{gmtModified}
+            WHERE id = #{id}
+    </update>
+
+    <!--  Integer reduceStock(MiaoshaGoods miaoshaGoods); -->
+    <update id = "reduceStock">
+        UPDATE miaosha_goods
+        SET
+            stock_count  = #{stockCount},
+            gmt_modified = #{gmtModified}
+            WHERE goods_id = #{goodsId}
+    </update>
+
+    <!-- boolean deleteMiaoshaGoodsById(@Param ("goodsId") Long goodsId); -->
+    <delete id = "deleteMiaoshaGoodsById">
+        DELETE
+            FROM miaosha_goods
+            WHERE id = #{id}
+    </delete>
+</mapper>
