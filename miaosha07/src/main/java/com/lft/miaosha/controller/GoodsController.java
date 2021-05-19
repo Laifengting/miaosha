@@ -76,13 +76,10 @@ public class GoodsController {
     // }
     
     /**
-     * JMeter 压测 5000*10 六次
-     * QPS 1795.4 个/s
-     * QPS 2550.5 个/s
-     * QPS 2523.7 个/s
-     * QPS 1793.0 个/s
-     * QPS 2510.9 个/s
-     * QPS 2603.6 个/s
+     * JMeter 压测 5000*10 三次
+     * QPS 3855.6 个/s
+     * QPS 4541.3 个/s
+     * QPS 4662.0 个/s
      * @param modeRe
      * @param miaoshaUser
      * @return
@@ -97,9 +94,6 @@ public class GoodsController {
         } else {
             // 将用户添加到 model 属性中
             model.addAttribute("user", miaoshaUser);
-            // 查询商品列表
-            List<GoodsVo> allGoods = goodsService.getAllGoods();
-            model.addAttribute("goodsList", allGoods);
             
             // 页面缓存步骤：4
             // 从缓存中取页面
@@ -109,8 +103,13 @@ public class GoodsController {
                 // 页面缓存步骤：5
                 return html;
             }
+            
             // 页面缓存步骤：6
             // 如果缓存中没有页面，进行手动渲染
+            // 查询商品列表
+            List<GoodsVo> allGoods = goodsService.getAllGoods();
+            model.addAttribute("goodsList", allGoods);
+            
             // SpringWebContext context = new SpringWebContext() 类过期，使用 WebContext
             IWebContext context = new WebContext(request, response, request.getServletContext(), request.getLocale(), model.asMap());
             // 页面缓存步骤：7

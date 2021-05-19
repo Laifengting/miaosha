@@ -17,13 +17,13 @@
             <if test = "head != null">
                 head = #{head},
             </if>
-            <if test = "gmt_last_login != null">
+            <if test = "gmtLastLogin != null">
                 gmt_last_login = #{gmtLastLogin},
             </if>
-            <if test = "login_count != null">
+            <if test = "loginCount != null">
                 login_count = #{loginCount},
             </if>
-            <if test = "gmt_modified != null">
+            <if test = "gmtModified != null">
                 gmt_modified = #{gmtModified}
             </if>
         </trim>

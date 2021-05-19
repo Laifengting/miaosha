@@ -230,10 +230,10 @@ public class MiaoshaUserServiceImpl implements MiaoshaUserService {
         userToDb.setGmtModified(new Date());
         // 执行更新数据库
         Integer result = miaoshaUserMapper.updateUserById(userToDb);
-        // 清除缓存
+        // 清除缓存 某个用户的对象缓存
         redisService.delete(MsUserKeyPrefix.KEY_PREFIX_ID, "" + user.getId());
-        // 更新缓存
-        redisService.set(MsUserKeyPrefix.KEY_PREFIX_TOKEN, tokenValue, userToDb);
+        // 清除缓存
+        redisService.delete(MsUserKeyPrefix.KEY_PREFIX_TOKEN, tokenValue);
         return result;
     }
     

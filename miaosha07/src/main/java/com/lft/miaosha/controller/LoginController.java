@@ -38,6 +38,16 @@ public class LoginController {
         return "login";
     }
     
+    /**
+     * JMeter 压测 5000*10 三次
+     * QPS 2067.3 个/s
+     * QPS 3152.6 个/s
+     * QPS 3345.4 个/s
+     * @param loginDto
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping ("do/login")
     @ResponseBody
     public R doLogin(@Valid LoginDto loginDto, HttpServletRequest request, HttpServletResponse response) {

@@ -27,8 +27,5 @@ public interface MiaoshaUserMapper {
             "values(#{id},#{nickname},#{password},#{salt},#{head},#{gmtCreated},#{gmtCreated},1)")
     Integer insertUser(MiaoshaUser miaoshaUser);
     
-    @Update ("UPDATE miaosha_user SET gmt_last_login = #{gmtLastLogin},login_count = #{loginCount} WHERE id = #{id}")
-    Integer updateCountAndTime(MiaoshaUser miaoshaUserFromDb);
-    
     Integer updateUserById(MiaoshaUser userToDb);
 }

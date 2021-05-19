@@ -29,6 +29,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler (value = Exception.class)
     public R exceptionHandler(Exception e) {
+        e.printStackTrace();
         return R.ERROR().code(ExceptionCode.EXCEPTION.getCode()).message(ExceptionCode.EXCEPTION.getMessage());
     }
     
