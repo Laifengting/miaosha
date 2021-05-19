@@ -54,31 +54,35 @@ public class RedisConstants {
     public static final Integer DATEBASE8 = 8;
     
     /**
-     * id
+     * 用户 id 手机号
      */
-    public static final String ID = "id";
+    public static final String USER_KEY_SUFFIX_ID = "id";
     /**
-     * 姓名
+     * 用户姓名
      */
-    public static final String NAME = "name";
-    /**
-     * 手机号
-     */
-    public static final String PHONE = "phone";
-    /**
-     * 时间日期
-     */
-    public static final String DATE = "date";
+    public static final String USER_KEY_SUFFIX_NICKNAME = "nickname";
     /**
      * token
      */
-    public static final String TOKEN = "token";
+    public static final String USER_KEY_SUFFIX_TOKEN = "token";
+    
     /**
      * 订单号
      */
-    public static final String ORDER_ID = "order:id";
+    public static final String ORDER_KEY_SUFFIX_ORDER_ID = "order:id";
+    
     /**
      * 地址
      */
-    public static final String ADDRESS = "address";
+    public static final String ORDER_KEY_SUFFIX_ADDRESS = "address";
+    
+    /**
+     * 商品列表
+     */
+    public static final String GOODS_KEY_SUFFIX_GOODS_LIST = "goods:list";
+    
+    /**
+     * 商品详情
+     */
+    public static final String GOODS_KEY_SUFFIX_GOODS_DETAIL = "goods:detail";
 }

@@ -1,8 +1,8 @@
 package com.lft.miaosha.config;
 
+import com.lft.miaosha.common.constant.RedisConstants;
 import com.lft.miaosha.entity.po.MiaoshaUser;
 import com.lft.miaosha.service.MiaoshaUserService;
-import com.lft.miaosha.service.impl.MiaoshaUserServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
@@ -46,8 +46,8 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
-        String paramToken = request.getParameter(MiaoshaUserServiceImpl.COOKIE_NAME_TOKEN);
-        String cookieToken = getCookieValue(request, MiaoshaUserServiceImpl.COOKIE_NAME_TOKEN);
+        String paramToken = request.getParameter(RedisConstants.USER_KEY_SUFFIX_TOKEN);
+        String cookieToken = getCookieValue(request, RedisConstants.USER_KEY_SUFFIX_TOKEN);
         
         // 如果都是空返回登录页面
         if (StringUtils.isEmpty(paramToken) && StringUtils.isEmpty(cookieToken)) {

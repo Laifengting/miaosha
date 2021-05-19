@@ -27,7 +27,9 @@ public interface MiaoshaUserService {
     
     ResultCode register(RegisterDto registerDto);
     
-    MiaoshaUser getUserFromCache(String cookieToken, HttpServletResponse response);
+    Integer updateMiaoshaUerById(String tokenValue, MiaoshaUser user);
+    
+    MiaoshaUser getUserFromCache(String tokenValue, HttpServletResponse response);
     
     public String getTokenFromCookie(HttpServletRequest request, String cookieNameToken);
 }

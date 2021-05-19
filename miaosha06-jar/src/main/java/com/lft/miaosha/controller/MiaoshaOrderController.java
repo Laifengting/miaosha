@@ -40,7 +40,7 @@ public class MiaoshaOrderController {
     
     /**
      * JMeter 压测 5000*10
-     * QPS 296.4 个/s
+     * QPS 294.5 个/s
      * @param model
      * @param miaoshaUser
      * @param goodsId

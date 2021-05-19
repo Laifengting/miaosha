@@ -84,7 +84,7 @@ public class RedisServiceImpl implements RedisService {
      * @param <T>
      * @return
      */
-    public <T> Long incr(KeyPrefix keyPrefix, String key) {
+    public Long incr(KeyPrefix keyPrefix, String key) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -103,7 +103,7 @@ public class RedisServiceImpl implements RedisService {
      * @param <T>
      * @return
      */
-    public <T> Long decr(KeyPrefix keyPrefix, String key) {
+    public Long decr(KeyPrefix keyPrefix, String key) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -122,7 +122,7 @@ public class RedisServiceImpl implements RedisService {
      * @param <T>
      * @return
      */
-    public <T> Boolean existsKey(KeyPrefix keyPrefix, String key) {
+    public Boolean existsKey(KeyPrefix keyPrefix, String key) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -142,7 +142,7 @@ public class RedisServiceImpl implements RedisService {
      * @return
      */
     @Override
-    public <T> Long expire(KeyPrefix keyPrefix, String key, Integer expireSeconds) {
+    public Long expire(KeyPrefix keyPrefix, String key, Integer expireSeconds) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -160,7 +160,7 @@ public class RedisServiceImpl implements RedisService {
      * @return 当 key 不存在时，返回 -2 。当 key 存在但没有设置剩余生存时间时，返回 -1 。否则，以秒为单位，返回 key 的剩余生存时间。 发生异常 返回 0
      */
     @Override
-    public <T> Long ttl(KeyPrefix keyPrefix, String key) {
+    public Long ttl(KeyPrefix keyPrefix, String key) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -178,7 +178,7 @@ public class RedisServiceImpl implements RedisService {
      * @return 当生存时间移除成功时，返回 1 .如果 key 不存在或 key 没有设置生存时间，返回 0 ， 发生异常 返回 -1
      */
     @Override
-    public <T> Long persist(KeyPrefix keyPrefix, String key) {
+    public Long persist(KeyPrefix keyPrefix, String key) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -190,10 +190,28 @@ public class RedisServiceImpl implements RedisService {
     }
     
     /**
+     * 移除指定 key
+     * @param keyPrefix
+     * @param key
+     * @return
+     */
+    @Override
+    public boolean delete(KeyPrefix keyPrefix, String key) {
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            String realKey = keyPrefix.getPrefix() + key;
+            return jedis.del(realKey) > 0;
+        } finally {
+            returnToPool(jedis);
+        }
+    }
+    
+    /**
      * 清空当前数据库中的所有 key,此命令从不失败。
      * @return 总是返回 OK
      */
-    public <T> String flushDB() {
+    public String flushDB() {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -203,6 +221,12 @@ public class RedisServiceImpl implements RedisService {
         }
     }
     
+    /**
+     * 对象转JSON字符串
+     * @param value
+     * @param <T>
+     * @return
+     */
     private <T> String beanToString(T value) {
         if (value == null) {
             return null;
@@ -217,6 +241,13 @@ public class RedisServiceImpl implements RedisService {
         }
     }
     
+    /**
+     * JSON字符串转对象
+     * @param str
+     * @param clazz
+     * @param <T>
+     * @return
+     */
     private <T> T stringToBean(String str, Class<T> clazz) {
         if (str == null || str.length() <= 0 || clazz == null) {
             return null;

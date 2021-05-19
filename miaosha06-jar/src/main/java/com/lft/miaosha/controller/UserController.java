@@ -37,6 +37,13 @@ public class UserController {
     @Autowired
     private GoodsService goodsService;
     
+    /**
+     * JMeter 压测 5000*10
+     * QPS 418.7 个/s
+     * @param model
+     * @param user
+     * @return
+     */
     @RequestMapping ("info")
     @ResponseBody
     public R info(Model model, MiaoshaUser user) {

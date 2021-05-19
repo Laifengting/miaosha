@@ -1,0 +1,904 @@
+2021-05-18 21:59:48.061 [http-nio-8080-exec-7] ERROR org.thymeleaf.TemplateEngine - [THYMELEAF][http-nio-8080-exec-7] Exception processing template "<!DOCTYPE html> <html lang="UTF-8" [...]>                 </tr>             </table>         </div>     </body> </html> ": Error resolving template [<!DOCTYPE html>
+<html lang="UTF-8" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- jquery -->
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css"/>
+        <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- jquery-validator -->
+        <script src="/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="/jquery-validation/localization/messages_zh.min.js" type="text/javascript"></script>
+        <!-- layer -->
+        <script src="/layer/layer.js" type="text/javascript"></script>
+        <!-- md5.js -->
+        <script src="/js/md5.min.js" type="text/javascript"></script>
+        <!-- common.js -->
+        <script src="/js/common.js" type="text/javascript"></script>
+        <title>商品列表</title>
+    </head>
+    <body>
+        <!-- 引入公共头部 -->
+        <div class="panel panel-default">
+            <div id="head">
+            <!-- 公共头部代码 -->
+            
+            <div>
+                <span>李民强</span>
+                <span>13023573685</span>
+                <form id="headForm" method="post" action="/logout/to/logout" >
+                    <button class="btn btn-primary btn-block" type="submit" id="logout">退出</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">商品列表</div>
+            <table class="table" id="goodslist">
+                <tr>
+                    <td>商品名称</td>
+                    <td>商品图片</td>
+                    <td>商品原价</td>
+                    <td>秒杀价</td>
+                    <td>库存数量</td>
+                    <td>开始时间</td>
+                    <td>结束时间</td>
+                    <td>详情</td>
+                </tr>
+                <tr>
+                    <td>小米8 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/8.jpg" width="100" height="100"></td>
+                    <td>9.90</td>
+                    <td>9.90</td>
+                    <td>10</td>
+                    <td>2021-05-16 20:00:00</td>
+                    <td>2021-05-16 22:00:00</td>
+                    <td><a href="/goods/to/detail/3">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米9 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/9.jpg" width="100" height="100"></td>
+                    <td>19.90</td>
+                    <td>19.90</td>
+                    <td>10</td>
+                    <td>2021-05-17 02:00:00</td>
+                    <td>2021-05-17 23:59:59</td>
+                    <td><a href="/goods/to/detail/4">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米10 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/10.jpg" width="100" height="100"></td>
+                    <td>29.90</td>
+                    <td>29.90</td>
+                    <td>10</td>
+                    <td>2021-05-18 01:00:00</td>
+                    <td>2021-05-18 22:00:00</td>
+                    <td><a href="/goods/to/detail/5">详情</a></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+], template might not exist or might not be accessible by any of the configured Template Resolvers
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [<!DOCTYPE html>
+<html lang="UTF-8" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- jquery -->
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css"/>
+        <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- jquery-validator -->
+        <script src="/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="/jquery-validation/localization/messages_zh.min.js" type="text/javascript"></script>
+        <!-- layer -->
+        <script src="/layer/layer.js" type="text/javascript"></script>
+        <!-- md5.js -->
+        <script src="/js/md5.min.js" type="text/javascript"></script>
+        <!-- common.js -->
+        <script src="/js/common.js" type="text/javascript"></script>
+        <title>商品列表</title>
+    </head>
+    <body>
+        <!-- 引入公共头部 -->
+        <div class="panel panel-default">
+            <div id="head">
+            <!-- 公共头部代码 -->
+            
+            <div>
+                <span>李民强</span>
+                <span>13023573685</span>
+                <form id="headForm" method="post" action="/logout/to/logout" >
+                    <button class="btn btn-primary btn-block" type="submit" id="logout">退出</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">商品列表</div>
+            <table class="table" id="goodslist">
+                <tr>
+                    <td>商品名称</td>
+                    <td>商品图片</td>
+                    <td>商品原价</td>
+                    <td>秒杀价</td>
+                    <td>库存数量</td>
+                    <td>开始时间</td>
+                    <td>结束时间</td>
+                    <td>详情</td>
+                </tr>
+                <tr>
+                    <td>小米8 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/8.jpg" width="100" height="100"></td>
+                    <td>9.90</td>
+                    <td>9.90</td>
+                    <td>10</td>
+                    <td>2021-05-16 20:00:00</td>
+                    <td>2021-05-16 22:00:00</td>
+                    <td><a href="/goods/to/detail/3">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米9 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/9.jpg" width="100" height="100"></td>
+                    <td>19.90</td>
+                    <td>19.90</td>
+                    <td>10</td>
+                    <td>2021-05-17 02:00:00</td>
+                    <td>2021-05-17 23:59:59</td>
+                    <td><a href="/goods/to/detail/4">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米10 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/10.jpg" width="100" height="100"></td>
+                    <td>29.90</td>
+                    <td>29.90</td>
+                    <td>10</td>
+                    <td>2021-05-18 01:00:00</td>
+                    <td>2021-05-18 22:00:00</td>
+                    <td><a href="/goods/to/detail/5">详情</a></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:366)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:190)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2021-05-18 21:59:48.063 [http-nio-8080-exec-7] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [<!DOCTYPE html>
+<html lang="UTF-8" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- jquery -->
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css"/>
+        <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- jquery-validator -->
+        <script src="/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="/jquery-validation/localization/messages_zh.min.js" type="text/javascript"></script>
+        <!-- layer -->
+        <script src="/layer/layer.js" type="text/javascript"></script>
+        <!-- md5.js -->
+        <script src="/js/md5.min.js" type="text/javascript"></script>
+        <!-- common.js -->
+        <script src="/js/common.js" type="text/javascript"></script>
+        <title>商品列表</title>
+    </head>
+    <body>
+        <!-- 引入公共头部 -->
+        <div class="panel panel-default">
+            <div id="head">
+            <!-- 公共头部代码 -->
+            
+            <div>
+                <span>李民强</span>
+                <span>13023573685</span>
+                <form id="headForm" method="post" action="/logout/to/logout" >
+                    <button class="btn btn-primary btn-block" type="submit" id="logout">退出</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">商品列表</div>
+            <table class="table" id="goodslist">
+                <tr>
+                    <td>商品名称</td>
+                    <td>商品图片</td>
+                    <td>商品原价</td>
+                    <td>秒杀价</td>
+                    <td>库存数量</td>
+                    <td>开始时间</td>
+                    <td>结束时间</td>
+                    <td>详情</td>
+                </tr>
+                <tr>
+                    <td>小米8 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/8.jpg" width="100" height="100"></td>
+                    <td>9.90</td>
+                    <td>9.90</td>
+                    <td>10</td>
+                    <td>2021-05-16 20:00:00</td>
+                    <td>2021-05-16 22:00:00</td>
+                    <td><a href="/goods/to/detail/3">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米9 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/9.jpg" width="100" height="100"></td>
+                    <td>19.90</td>
+                    <td>19.90</td>
+                    <td>10</td>
+                    <td>2021-05-17 02:00:00</td>
+                    <td>2021-05-17 23:59:59</td>
+                    <td><a href="/goods/to/detail/4">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米10 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/10.jpg" width="100" height="100"></td>
+                    <td>29.90</td>
+                    <td>29.90</td>
+                    <td>10</td>
+                    <td>2021-05-18 01:00:00</td>
+                    <td>2021-05-18 22:00:00</td>
+                    <td><a href="/goods/to/detail/5">详情</a></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [<!DOCTYPE html>
+<html lang="UTF-8" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- jquery -->
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css"/>
+        <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- jquery-validator -->
+        <script src="/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="/jquery-validation/localization/messages_zh.min.js" type="text/javascript"></script>
+        <!-- layer -->
+        <script src="/layer/layer.js" type="text/javascript"></script>
+        <!-- md5.js -->
+        <script src="/js/md5.min.js" type="text/javascript"></script>
+        <!-- common.js -->
+        <script src="/js/common.js" type="text/javascript"></script>
+        <title>商品列表</title>
+    </head>
+    <body>
+        <!-- 引入公共头部 -->
+        <div class="panel panel-default">
+            <div id="head">
+            <!-- 公共头部代码 -->
+            
+            <div>
+                <span>李民强</span>
+                <span>13023573685</span>
+                <form id="headForm" method="post" action="/logout/to/logout" >
+                    <button class="btn btn-primary btn-block" type="submit" id="logout">退出</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">商品列表</div>
+            <table class="table" id="goodslist">
+                <tr>
+                    <td>商品名称</td>
+                    <td>商品图片</td>
+                    <td>商品原价</td>
+                    <td>秒杀价</td>
+                    <td>库存数量</td>
+                    <td>开始时间</td>
+                    <td>结束时间</td>
+                    <td>详情</td>
+                </tr>
+                <tr>
+                    <td>小米8 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/8.jpg" width="100" height="100"></td>
+                    <td>9.90</td>
+                    <td>9.90</td>
+                    <td>10</td>
+                    <td>2021-05-16 20:00:00</td>
+                    <td>2021-05-16 22:00:00</td>
+                    <td><a href="/goods/to/detail/3">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米9 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/9.jpg" width="100" height="100"></td>
+                    <td>19.90</td>
+                    <td>19.90</td>
+                    <td>10</td>
+                    <td>2021-05-17 02:00:00</td>
+                    <td>2021-05-17 23:59:59</td>
+                    <td><a href="/goods/to/detail/4">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米10 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/10.jpg" width="100" height="100"></td>
+                    <td>29.90</td>
+                    <td>29.90</td>
+                    <td>10</td>
+                    <td>2021-05-18 01:00:00</td>
+                    <td>2021-05-18 22:00:00</td>
+                    <td><a href="/goods/to/detail/5">详情</a></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:366)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:190)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2021-05-18 22:01:56.856 [http-nio-8080-exec-2] ERROR org.thymeleaf.TemplateEngine - [THYMELEAF][http-nio-8080-exec-2] Exception processing template "<!DOCTYPE html> <html lang="UTF-8" [...]>                 </tr>             </table>         </div>     </body> </html> ": Error resolving template [<!DOCTYPE html>
+<html lang="UTF-8" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- jquery -->
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css"/>
+        <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- jquery-validator -->
+        <script src="/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="/jquery-validation/localization/messages_zh.min.js" type="text/javascript"></script>
+        <!-- layer -->
+        <script src="/layer/layer.js" type="text/javascript"></script>
+        <!-- md5.js -->
+        <script src="/js/md5.min.js" type="text/javascript"></script>
+        <!-- common.js -->
+        <script src="/js/common.js" type="text/javascript"></script>
+        <title>商品列表</title>
+    </head>
+    <body>
+        <!-- 引入公共头部 -->
+        <div class="panel panel-default">
+            <div id="head">
+            <!-- 公共头部代码 -->
+            
+            <div>
+                <span>李民强</span>
+                <span>13023573685</span>
+                <form id="headForm" method="post" action="/logout/to/logout" >
+                    <button class="btn btn-primary btn-block" type="submit" id="logout">退出</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">商品列表</div>
+            <table class="table" id="goodslist">
+                <tr>
+                    <td>商品名称</td>
+                    <td>商品图片</td>
+                    <td>商品原价</td>
+                    <td>秒杀价</td>
+                    <td>库存数量</td>
+                    <td>开始时间</td>
+                    <td>结束时间</td>
+                    <td>详情</td>
+                </tr>
+                <tr>
+                    <td>小米8 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/8.jpg" width="100" height="100"></td>
+                    <td>9.90</td>
+                    <td>9.90</td>
+                    <td>10</td>
+                    <td>2021-05-16 20:00:00</td>
+                    <td>2021-05-16 22:00:00</td>
+                    <td><a href="/goods/to/detail/3">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米9 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/9.jpg" width="100" height="100"></td>
+                    <td>19.90</td>
+                    <td>19.90</td>
+                    <td>10</td>
+                    <td>2021-05-17 02:00:00</td>
+                    <td>2021-05-17 23:59:59</td>
+                    <td><a href="/goods/to/detail/4">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米10 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/10.jpg" width="100" height="100"></td>
+                    <td>29.90</td>
+                    <td>29.90</td>
+                    <td>10</td>
+                    <td>2021-05-18 01:00:00</td>
+                    <td>2021-05-18 22:00:00</td>
+                    <td><a href="/goods/to/detail/5">详情</a></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+], template might not exist or might not be accessible by any of the configured Template Resolvers
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [<!DOCTYPE html>
+<html lang="UTF-8" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- jquery -->
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css"/>
+        <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- jquery-validator -->
+        <script src="/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="/jquery-validation/localization/messages_zh.min.js" type="text/javascript"></script>
+        <!-- layer -->
+        <script src="/layer/layer.js" type="text/javascript"></script>
+        <!-- md5.js -->
+        <script src="/js/md5.min.js" type="text/javascript"></script>
+        <!-- common.js -->
+        <script src="/js/common.js" type="text/javascript"></script>
+        <title>商品列表</title>
+    </head>
+    <body>
+        <!-- 引入公共头部 -->
+        <div class="panel panel-default">
+            <div id="head">
+            <!-- 公共头部代码 -->
+            
+            <div>
+                <span>李民强</span>
+                <span>13023573685</span>
+                <form id="headForm" method="post" action="/logout/to/logout" >
+                    <button class="btn btn-primary btn-block" type="submit" id="logout">退出</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">商品列表</div>
+            <table class="table" id="goodslist">
+                <tr>
+                    <td>商品名称</td>
+                    <td>商品图片</td>
+                    <td>商品原价</td>
+                    <td>秒杀价</td>
+                    <td>库存数量</td>
+                    <td>开始时间</td>
+                    <td>结束时间</td>
+                    <td>详情</td>
+                </tr>
+                <tr>
+                    <td>小米8 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/8.jpg" width="100" height="100"></td>
+                    <td>9.90</td>
+                    <td>9.90</td>
+                    <td>10</td>
+                    <td>2021-05-16 20:00:00</td>
+                    <td>2021-05-16 22:00:00</td>
+                    <td><a href="/goods/to/detail/3">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米9 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/9.jpg" width="100" height="100"></td>
+                    <td>19.90</td>
+                    <td>19.90</td>
+                    <td>10</td>
+                    <td>2021-05-17 02:00:00</td>
+                    <td>2021-05-17 23:59:59</td>
+                    <td><a href="/goods/to/detail/4">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米10 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/10.jpg" width="100" height="100"></td>
+                    <td>29.90</td>
+                    <td>29.90</td>
+                    <td>10</td>
+                    <td>2021-05-18 01:00:00</td>
+                    <td>2021-05-18 22:00:00</td>
+                    <td><a href="/goods/to/detail/5">详情</a></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:366)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:190)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+2021-05-18 22:01:56.858 [http-nio-8080-exec-2] ERROR o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateInputException: Error resolving template [<!DOCTYPE html>
+<html lang="UTF-8" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- jquery -->
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css"/>
+        <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- jquery-validator -->
+        <script src="/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="/jquery-validation/localization/messages_zh.min.js" type="text/javascript"></script>
+        <!-- layer -->
+        <script src="/layer/layer.js" type="text/javascript"></script>
+        <!-- md5.js -->
+        <script src="/js/md5.min.js" type="text/javascript"></script>
+        <!-- common.js -->
+        <script src="/js/common.js" type="text/javascript"></script>
+        <title>商品列表</title>
+    </head>
+    <body>
+        <!-- 引入公共头部 -->
+        <div class="panel panel-default">
+            <div id="head">
+            <!-- 公共头部代码 -->
+            
+            <div>
+                <span>李民强</span>
+                <span>13023573685</span>
+                <form id="headForm" method="post" action="/logout/to/logout" >
+                    <button class="btn btn-primary btn-block" type="submit" id="logout">退出</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">商品列表</div>
+            <table class="table" id="goodslist">
+                <tr>
+                    <td>商品名称</td>
+                    <td>商品图片</td>
+                    <td>商品原价</td>
+                    <td>秒杀价</td>
+                    <td>库存数量</td>
+                    <td>开始时间</td>
+                    <td>结束时间</td>
+                    <td>详情</td>
+                </tr>
+                <tr>
+                    <td>小米8 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/8.jpg" width="100" height="100"></td>
+                    <td>9.90</td>
+                    <td>9.90</td>
+                    <td>10</td>
+                    <td>2021-05-16 20:00:00</td>
+                    <td>2021-05-16 22:00:00</td>
+                    <td><a href="/goods/to/detail/3">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米9 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/9.jpg" width="100" height="100"></td>
+                    <td>19.90</td>
+                    <td>19.90</td>
+                    <td>10</td>
+                    <td>2021-05-17 02:00:00</td>
+                    <td>2021-05-17 23:59:59</td>
+                    <td><a href="/goods/to/detail/4">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米10 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/10.jpg" width="100" height="100"></td>
+                    <td>29.90</td>
+                    <td>29.90</td>
+                    <td>10</td>
+                    <td>2021-05-18 01:00:00</td>
+                    <td>2021-05-18 22:00:00</td>
+                    <td><a href="/goods/to/detail/5">详情</a></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+], template might not exist or might not be accessible by any of the configured Template Resolvers] with root cause
+org.thymeleaf.exceptions.TemplateInputException: Error resolving template [<!DOCTYPE html>
+<html lang="UTF-8" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <!-- jquery -->
+        <script src="/js/jquery.min.js" type="text/javascript"></script>
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" type="text/css"/>
+        <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- jquery-validator -->
+        <script src="/jquery-validation/jquery.validate.min.js" type="text/javascript"></script>
+        <script src="/jquery-validation/localization/messages_zh.min.js" type="text/javascript"></script>
+        <!-- layer -->
+        <script src="/layer/layer.js" type="text/javascript"></script>
+        <!-- md5.js -->
+        <script src="/js/md5.min.js" type="text/javascript"></script>
+        <!-- common.js -->
+        <script src="/js/common.js" type="text/javascript"></script>
+        <title>商品列表</title>
+    </head>
+    <body>
+        <!-- 引入公共头部 -->
+        <div class="panel panel-default">
+            <div id="head">
+            <!-- 公共头部代码 -->
+            
+            <div>
+                <span>李民强</span>
+                <span>13023573685</span>
+                <form id="headForm" method="post" action="/logout/to/logout" >
+                    <button class="btn btn-primary btn-block" type="submit" id="logout">退出</button>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">商品列表</div>
+            <table class="table" id="goodslist">
+                <tr>
+                    <td>商品名称</td>
+                    <td>商品图片</td>
+                    <td>商品原价</td>
+                    <td>秒杀价</td>
+                    <td>库存数量</td>
+                    <td>开始时间</td>
+                    <td>结束时间</td>
+                    <td>详情</td>
+                </tr>
+                <tr>
+                    <td>小米8 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/8.jpg" width="100" height="100"></td>
+                    <td>9.90</td>
+                    <td>9.90</td>
+                    <td>10</td>
+                    <td>2021-05-16 20:00:00</td>
+                    <td>2021-05-16 22:00:00</td>
+                    <td><a href="/goods/to/detail/3">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米9 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/9.jpg" width="100" height="100"></td>
+                    <td>19.90</td>
+                    <td>19.90</td>
+                    <td>10</td>
+                    <td>2021-05-17 02:00:00</td>
+                    <td>2021-05-17 23:59:59</td>
+                    <td><a href="/goods/to/detail/4">详情</a></td>
+                </tr>
+                <tr>
+                    <td>小米10 手机</td>
+                    <!-- 从本机资源静态资源目录中获取 -->
+                    <!--<td><img th:src="@{${goods.goodsImage}}" width="100" height="100"></td>-->
+                    <td><img src="/img/10.jpg" width="100" height="100"></td>
+                    <td>29.90</td>
+                    <td>29.90</td>
+                    <td>10</td>
+                    <td>2021-05-18 01:00:00</td>
+                    <td>2021-05-18 22:00:00</td>
+                    <td><a href="/goods/to/detail/5">详情</a></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
+], template might not exist or might not be accessible by any of the configured Template Resolvers
+	at org.thymeleaf.engine.TemplateManager.resolveTemplate(TemplateManager.java:869)
+	at org.thymeleaf.engine.TemplateManager.parseAndProcess(TemplateManager.java:607)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1098)
+	at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1072)
+	at org.thymeleaf.spring5.view.ThymeleafView.renderFragment(ThymeleafView.java:366)
+	at org.thymeleaf.spring5.view.ThymeleafView.render(ThymeleafView.java:190)
+	at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1373)
+	at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1118)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:893)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1707)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)

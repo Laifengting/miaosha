@@ -21,4 +21,6 @@ public class ExpireSeconds {
     public static final Integer DAY = 24 * 60 * 60;
     
     public static final Integer WEEK = 7 * 24 * 60 * 60;
+    
+    public static final Integer FOREVER = -1;
 }

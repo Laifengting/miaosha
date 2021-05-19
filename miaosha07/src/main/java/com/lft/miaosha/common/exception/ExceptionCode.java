@@ -27,6 +27,8 @@ public enum ExceptionCode {
     CREATE_ORDER_EXCEPTION(500811, "创建订单失败异常"),
     CREATE_MIAOSHA_ORDER_EXCEPTION(500812, "创建秒杀订单失败异常"),
     NULL_ADDRESS_EXCEPTION(500813, "空地址异常"),
+    NULL_ARGUMENT_EXCEPTION(500814, "空参数异常"),
+    MOBILE_NOT_EXISTS_EXCEPTION(500815, "手机号码不存在异常"),
     ARRAY_INDEX_OUT_OF_BOUNDS_EXCEPTION(500888, "数组索引越界异常");
     
     private Integer code;

@@ -13,13 +13,15 @@ package com.lft.miaosha.common.key;
  */
 public interface KeyPrefix {
     /**
-     * 获取 com.lft.miaosha.common.key 前缀
+     * 获取 key 前缀
      * @return
      */
     public String getPrefix();
     
     /**
      * 获取过期时间（秒）
+     * -1 表示永不过期。
+     * -2 表示已经失败
      * @return
      */
     public Integer expireSeconds();

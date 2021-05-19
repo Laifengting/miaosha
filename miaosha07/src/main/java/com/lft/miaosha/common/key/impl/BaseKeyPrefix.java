@@ -19,8 +19,10 @@ public abstract class BaseKeyPrefix implements KeyPrefix {
     private String prefix;
     
     public BaseKeyPrefix(String prefix) {
-        // 默认 -2 代表永不过期
-        this(-2, prefix);
+        // 默认 -1 代表永不过期
+        // -2 代表已经失效
+        // 正数代表 剩余秒数
+        this(-1, prefix);
     }
     
     public BaseKeyPrefix(Integer expireSeconds, String prefix) {
@@ -29,7 +31,7 @@ public abstract class BaseKeyPrefix implements KeyPrefix {
     }
     
     /**
-     * 获取 com.lft.miaosha.common.key 前缀
+     * 获取 key 前缀
      * @return
      */
     @Override
@@ -44,7 +46,9 @@ public abstract class BaseKeyPrefix implements KeyPrefix {
      */
     @Override
     public Integer expireSeconds() {
-        // 默认 -2 代表永不过期
+        // 默认 -1 代表永不过期
+        // -2 代表已经失效
+        // 正数代表 剩余秒数
         return expireSeconds;
     }
 }

@@ -1,5 +1,6 @@
 package com.lft.miaosha.service.impl;
 
+import com.lft.miaosha.common.constant.RedisConstants;
 import com.lft.miaosha.common.exception.ExceptionCode;
 import com.lft.miaosha.common.key.impl.MsUserKeyPrefix;
 import com.lft.miaosha.common.result.R;
@@ -17,6 +18,7 @@ import com.lft.miaosha.service.RedisService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +41,6 @@ import java.util.Date;
  */
 @Service
 public class MiaoshaUserServiceImpl implements MiaoshaUserService {
-    public static final String COOKIE_NAME_TOKEN = "token";
     private static final Logger log = LoggerFactory.getLogger(MiaoshaUserServiceImpl.class);
     
     @Autowired
@@ -55,7 +56,26 @@ public class MiaoshaUserServiceImpl implements MiaoshaUserService {
      */
     @Override
     public MiaoshaUser getUserById(Long id) {
-        return miaoshaUserMapper.selectUserById(id);
+        // 对象缓存步骤：1
+        // 从缓存中获取用户
+        MiaoshaUser user = redisService.get(MsUserKeyPrefix.KEY_PREFIX_ID, "" + id, MiaoshaUser.class);
+        // 如果有直接缓存
+        if (user != null) {
+            // 对象缓存步骤：2
+            return user;
+        }
+        // 对象缓存步骤：3
+        // 如果没有查询数据库
+        user = miaoshaUserMapper.selectUserById(id);
+        // 如果不是空
+        if (user != null) {
+            // 对象缓存步骤：4
+            // 添加到缓存
+            redisService.set(MsUserKeyPrefix.KEY_PREFIX_ID, "" + id, user);
+        }
+        // 对象缓存步骤：5
+        // 返回 user
+        return user;
     }
     
     /**
@@ -67,12 +87,19 @@ public class MiaoshaUserServiceImpl implements MiaoshaUserService {
      */
     @Override
     public R login(@Valid LoginDto loginDto, HttpServletRequest request, HttpServletResponse response) {
-        // 从 cookie 中获取
-        String tokenFromCookie = getTokenFromCookie(request, COOKIE_NAME_TOKEN);
         MiaoshaUser userFromCache = null;
-        if (StringUtils.isNotEmpty(tokenFromCookie)) {
+        // 从请求参数中获取 token
+        String tokenFromCookieParam = request.getParameter(RedisConstants.USER_KEY_SUFFIX_TOKEN);
+        // 从 cookie 中获取  token
+        String tokenFromCookie = getTokenFromCookie(request, RedisConstants.USER_KEY_SUFFIX_TOKEN);
+        String trueToken = tokenFromCookieParam != null
+                ?
+                tokenFromCookieParam
+                :
+                (tokenFromCookie != null ? tokenFromCookie : null);
+        if (StringUtils.isNotEmpty(trueToken)) {
             // 从缓存中获取对象
-            userFromCache = getUserFromCache(tokenFromCookie, response);
+            userFromCache = getUserFromCache(trueToken, response);
         }
         
         // 从传入的参数中获取手机号码和密码
@@ -81,8 +108,11 @@ public class MiaoshaUserServiceImpl implements MiaoshaUserService {
         
         // 缓存中对象不为空
         if (userFromCache != null) {
-            if (mobile.equals(userFromCache.getId())) {
-                // 直接返回带对象数据的结果
+            // 且手机号码 密码和表单中的一致
+            if (mobile.equals(userFromCache.getId()) &&
+                    (Md5Util.formPassToDbPass(formPassword, userFromCache.getSalt()))
+                            .equals(userFromCache.getPassword())) {
+                // 直接返回缓存中的数据
                 return R.OK().data("user", userFromCache).code(ResultCode.LOGIN_SUCCESSR.getCode())
                         .message(ResultCode.LOGIN_SUCCESSR.getMessage());
             }
@@ -95,15 +125,6 @@ public class MiaoshaUserServiceImpl implements MiaoshaUserService {
         if (miaoshaUserFromDb == null) {
             throw new MsException(ExceptionCode.ILLEGAL_ARGUMENT_EXCEPTION);
         }
-        // 修改登录次数和登录时间
-        miaoshaUserFromDb.setLoginCount(miaoshaUserFromDb.getLoginCount() + 1);
-        miaoshaUserFromDb.setGmtLastLogin(new Date());
-        // 更新到数据库
-        Integer result = updateLoginCountAndTime(miaoshaUserFromDb);
-        if (result <= 0) {
-            throw new MsException(ExceptionCode.UPDATE_LOGIN_COUNT_AND_LAST_LOGIN_TIME_EXCEPTION);
-        }
-        log.info(miaoshaUserFromDb.toString());
         // 用户不为空，获取用户的 密码，数据库随机盐值
         String dbPassword = miaoshaUserFromDb.getPassword();
         String saltDb = miaoshaUserFromDb.getSalt();
@@ -113,10 +134,23 @@ public class MiaoshaUserServiceImpl implements MiaoshaUserService {
         if (!formPassToDbPass.equals(dbPassword)) {
             throw new MsException(ExceptionCode.WRONG_PASSWORD_EXCEPTION);
         }
+        
         // 如果密码正确 生成 token
         String token = UuidUtil.getToken();
-        // 生成 cookie 放入到 响应体中
+        // 生成 cookie 放入到 响应体中 其中会保存到 redis 缓存中
         addCookie(miaoshaUserFromDb, token, response);
+        
+        // 修改登录次数和登录时间
+        MiaoshaUser miaoshaUser = new MiaoshaUser();
+        miaoshaUser.setId(miaoshaUserFromDb.getId());
+        miaoshaUser.setLoginCount(miaoshaUserFromDb.getLoginCount() + 1);
+        miaoshaUser.setGmtLastLogin(new Date());
+        
+        // 将 登录次数和登录时间 更新到数据库
+        Integer result = updateMiaoshaUerById(token, miaoshaUser);
+        if (result <= 0) {
+            throw new MsException(ExceptionCode.UPDATE_LOGIN_COUNT_AND_LAST_LOGIN_TIME_EXCEPTION);
+        }
         
         // 返回登录成功
         return R.OK()
@@ -172,24 +206,56 @@ public class MiaoshaUserServiceImpl implements MiaoshaUserService {
     }
     
     /**
+     * 根据 id 修改 用户
+     * @param user
+     * @return
+     */
+    @Override
+    public Integer updateMiaoshaUerById(String tokenValue, MiaoshaUser user) {
+        if (user == null) {
+            throw new MsException(ExceptionCode.NULL_ARGUMENT_EXCEPTION);
+        }
+        // 从缓存或者获取 miaoshaUser
+        MiaoshaUser miaoshaUser = getUserById(user.getId());
+        if (miaoshaUser == null) {
+            throw new MsException(ExceptionCode.MOBILE_NOT_EXISTS_EXCEPTION);
+        }
+        // 更新数据库前准备数据
+        MiaoshaUser userToDb = new MiaoshaUser();
+        BeanUtils.copyProperties(user, userToDb);
+        if (userToDb.getPassword() != null) {
+            userToDb.setPassword(Md5Util.formPassToDbPass(userToDb.getPassword(), miaoshaUser.getSalt()));
+        }
+        //更新操作一定要设置修改时间
+        userToDb.setGmtModified(new Date());
+        // 执行更新数据库
+        Integer result = miaoshaUserMapper.updateUserById(userToDb);
+        // 清除缓存
+        redisService.delete(MsUserKeyPrefix.KEY_PREFIX_ID, "" + user.getId());
+        // 更新缓存
+        redisService.set(MsUserKeyPrefix.KEY_PREFIX_TOKEN, tokenValue, userToDb);
+        return result;
+    }
+    
+    /**
      * 从缓存中获取 User
-     * @param cookieToken
+     * @param tokenValue
      * @param response
      * @return
      */
     @Override
-    public MiaoshaUser getUserFromCache(String cookieToken, HttpServletResponse response) {
-        if (StringUtils.isEmpty(cookieToken)) {
+    public MiaoshaUser getUserFromCache(String tokenValue, HttpServletResponse response) {
+        if (StringUtils.isEmpty(tokenValue)) {
             return null;
         }
         // 如果 cookie 中的的 token 不为空，试着从缓存中获取对象
-        MiaoshaUser miaoshaUser = redisService.get(MsUserKeyPrefix.TOKEN_KEY, cookieToken, MiaoshaUser.class);
+        MiaoshaUser miaoshaUser = redisService.get(MsUserKeyPrefix.KEY_PREFIX_TOKEN, tokenValue, MiaoshaUser.class);
         // 如果用户为空。直接返回空
         if (miaoshaUser == null) {
             return null;
         } else {
             // 先添加到缓存
-            addCookie(miaoshaUser, cookieToken, response);
+            addCookie(miaoshaUser, tokenValue, response);
             // 再返回用户
             return miaoshaUser;
         }
@@ -202,11 +268,11 @@ public class MiaoshaUserServiceImpl implements MiaoshaUserService {
      */
     private void addCookie(MiaoshaUser miaoshaUser, String token, HttpServletResponse response) {
         // 将 token 放入到 Redis 中
-        redisService.set(MsUserKeyPrefix.TOKEN_KEY, token, miaoshaUser);
+        redisService.set(MsUserKeyPrefix.KEY_PREFIX_TOKEN, token, miaoshaUser);
         // 创建 cookie
-        Cookie cookie = new Cookie(COOKIE_NAME_TOKEN, token);
+        Cookie cookie = new Cookie(RedisConstants.USER_KEY_SUFFIX_TOKEN, token);
         // 设置 cookie 过期时间
-        cookie.setMaxAge(MsUserKeyPrefix.TOKEN_KEY.expireSeconds());
+        cookie.setMaxAge(MsUserKeyPrefix.KEY_PREFIX_TOKEN.expireSeconds());
         // 设置 cookie 存放的路径("/"表示存放在根目录下，所有的应用共享 cookie)
         cookie.setPath("/");
         // 将 cookie 加入到响应体中
@@ -242,14 +308,5 @@ public class MiaoshaUserServiceImpl implements MiaoshaUserService {
             }
         }
         return tokenFromRequestCookie;
-    }
-    
-    /**
-     * 更新登录次数和时间方法
-     * @param miaoshaUserFromDb
-     * @return
-     */
-    private Integer updateLoginCountAndTime(MiaoshaUser miaoshaUserFromDb) {
-        return miaoshaUserMapper.updateCountAndTime(miaoshaUserFromDb);
     }
 }

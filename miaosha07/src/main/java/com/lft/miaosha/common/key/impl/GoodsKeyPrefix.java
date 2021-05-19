@@ -14,16 +14,16 @@ import com.lft.miaosha.common.key.ExpireSeconds;
  * @version 1.0.0
  * @since JDK 8
  */
-public class MsUserKeyPrefix extends BaseKeyPrefix {
-    // 过期时间是7天
-    public static MsUserKeyPrefix KEY_PREFIX_ID = new MsUserKeyPrefix(ExpireSeconds.FOREVER, RedisConstants.USER_KEY_SUFFIX_ID);
-    public static MsUserKeyPrefix KEY_PREFIX_TOKEN = new MsUserKeyPrefix(ExpireSeconds.WEEK, RedisConstants.USER_KEY_SUFFIX_TOKEN);
+public class GoodsKeyPrefix extends BaseKeyPrefix {
+    // 过期时间是1天
+    public static GoodsKeyPrefix KEY_PREFIX_GOODS_LIST = new GoodsKeyPrefix(ExpireSeconds.MINUTE, RedisConstants.GOODS_KEY_SUFFIX_GOODS_LIST);
+    public static GoodsKeyPrefix KEY_PREFIX_GOODS_DETAIL = new GoodsKeyPrefix(ExpireSeconds.MINUTE, RedisConstants.GOODS_KEY_SUFFIX_GOODS_DETAIL);
     
-    private MsUserKeyPrefix(Integer expireSeconds, String prefix) {
+    private GoodsKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);
     }
     
-    private MsUserKeyPrefix(String prefix) {
+    private GoodsKeyPrefix(String prefix) {
         super(prefix);
     }
 }

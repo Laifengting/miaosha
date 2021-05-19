@@ -51,36 +51,6 @@ public class JDBCUtils {
     /**
      * @param conn
      * @param ps
-     * @return void
-     * @Title: closeResource方法
-     * @Description: 关闭Connection连接和Statement的操作
-     * TODO(适用条件/执行流程/使用方法/注意事项)
-     * @author Laifengting
-     * @date 2020年5月13日
-     * @since JDK 13
-     */
-    public static void closeResource(Connection conn, Statement ps) {
-        // 资源的关闭
-        if (ps != null) {
-            try {
-                ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    
-    /**
-     * @param conn
-     * @param ps
      * @param rs
      * @return void
      * @Title: closeResource方法
@@ -112,5 +82,65 @@ public class JDBCUtils {
                 e.printStackTrace();
             }
         }
+    }
+    
+    /**
+     * @param conn
+     * @param ps
+     * @return void
+     * @Title: closeResource方法
+     * @Description: 关闭Connection连接和Statement的操作
+     * TODO(适用条件/执行流程/使用方法/注意事项)
+     * @author Laifengting
+     * @date 2020年5月13日
+     * @since JDK 13
+     */
+    public static void closeResource(Connection conn, Statement ps) {
+        closeResource(conn, ps, null);
+    }
+    
+    /**
+     * @param conn
+     * @param ps
+     * @return void
+     * @Title: closeResource方法
+     * @Description: 关闭Connection连接和Statement的操作
+     * TODO(适用条件/执行流程/使用方法/注意事项)
+     * @author Laifengting
+     * @date 2020年5月13日
+     * @since JDK 13
+     */
+    public static void closeResource(Connection conn) {
+        closeResource(conn, null, null);
+    }
+    
+    /**
+     * @param conn
+     * @param ps
+     * @return void
+     * @Title: closeResource方法
+     * @Description: 关闭Connection连接和Statement的操作
+     * TODO(适用条件/执行流程/使用方法/注意事项)
+     * @author Laifengting
+     * @date 2020年5月13日
+     * @since JDK 13
+     */
+    public static void closeResource(Statement ps) {
+        closeResource(null, ps, null);
+    }
+    
+    /**
+     * @param conn
+     * @param ps
+     * @param rs
+     * @return void
+     * @Title: closeResource方法
+     * @Description: 关闭Connection连接、Statement和ResultSet的操作
+     * @author Laifengting
+     * @date 2020年5月14日
+     * @since JDK 13
+     */
+    public static void closeResource(ResultSet rs) {
+        closeResource(null, null, rs);
     }
 }

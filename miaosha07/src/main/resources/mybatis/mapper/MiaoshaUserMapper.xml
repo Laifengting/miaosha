@@ -3,5 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "com.lft.miaosha.dao.MiaoshaUserMapper">
-
+    <!-- Integer updateUserById(MiaoshaUser userToDb); -->
+    <update id = "updateUserById">
+        UPDATE miaosha_user
+        <trim prefix = "SET"
+              suffixOverrides = ",">
+            <if test = "nickname != null">
+                nickname = #{nickname},
+            </if>
+            <if test = "password != null">
+                password = #{password},
+            </if>
+            <if test = "head != null">
+                head = #{head},
+            </if>
+            <if test = "gmt_last_login != null">
+                gmt_last_login = #{gmtLastLogin},
+            </if>
+            <if test = "login_count != null">
+                login_count = #{loginCount},
+            </if>
+            <if test = "gmt_modified != null">
+                gmt_modified = #{gmtModified}
+            </if>
+        </trim>
+        WHERE id = #{id}
+    </update>
 </mapper>

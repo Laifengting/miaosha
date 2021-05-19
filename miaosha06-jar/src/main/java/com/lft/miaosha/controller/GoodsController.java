@@ -38,6 +38,15 @@ public class GoodsController {
     @Autowired
     private AddressService addressService;
     
+    /**
+     * JMeter 压测 5000*10 六次
+     * QPS 882.6 个/s
+     * QPS 1780.9 个/s
+     * QPS 1733.8 个/s
+     * @param model
+     * @param miaoshaUser
+     * @return
+     */
     @RequestMapping ("to/list")
     public String toList(Model model, MiaoshaUser miaoshaUser) {
         if (miaoshaUser == null) {

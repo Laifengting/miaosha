@@ -22,6 +22,7 @@ public class MiaoshaUser {
     private Date gmtCreated;
     private Date gmtLastLogin;
     private Integer loginCount;
+    private Date gmtModified;
     
     public Long getId() {
         return id;
@@ -87,6 +88,14 @@ public class MiaoshaUser {
         this.loginCount = loginCount;
     }
     
+    public Date getGmtModified() {
+        return gmtModified;
+    }
+    
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
+    }
+    
     @Override
     public String toString() {
         return "MiaoshaUser{" +
@@ -98,6 +107,7 @@ public class MiaoshaUser {
                 ", gmtCreated=" + gmtCreated +
                 ", gmtLastLogin=" + gmtLastLogin +
                 ", loginCount=" + loginCount +
+                ", gmtModified=" + gmtModified +
                 '}';
     }
 }
