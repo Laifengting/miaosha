@@ -40,4 +40,23 @@ CREATE INDEX miaosha_order_user_id_idx USING BTREE ON miaosha_order(user_id);
 # 创建联合索引
 CREATE INDEX miaosha_order_user_id_idx USING BTREE ON miaosha_order(user_id, order_id, goods_id);
 
+# 删除表，并重新创建表
+TRUNCATE TABLE miaosha.miaosha_order;
+
+# 删除表内容
+DELETE
+	FROM miaosha_order
+	WHERE id = 1;
+
+# 分析表
+ANALYZE TABLE miaosha.miaosha_order;
+
+# 检查表
+CHECK TABLE miaosha.miaosha_order;
+
+# 优化表
+OPTIMIZE TABLE miaosha.miaosha_order;
+
+# 修复表
+REPAIR TABLE miaosha.miaosha_order;
 

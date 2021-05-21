@@ -17,7 +17,7 @@ import com.lft.miaosha.common.key.ExpireSeconds;
 public class MSGoodsKeyPrefix extends BaseKeyPrefix {
     // 过期时间是1天
     public static MSGoodsKeyPrefix KEY_PREFIX_GET_MSGOODS_BY_GID =
-            new MSGoodsKeyPrefix(ExpireSeconds.DAY, RedisConstants.MS_GOODS_KEY_SUFFIX_GET_MSGOODS_BY_GID);
+            new MSGoodsKeyPrefix(ExpireSeconds.SECOND * 5, RedisConstants.MS_GOODS_KEY_SUFFIX_GET_MSGOODS_BY_GID);
     
     private MSGoodsKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);

@@ -84,6 +84,11 @@ public class MiaoshaOrderController {
     }
     
     /**
+     * JMeter 压测 5000*10 三次
+     * QPS 1892.6 个/s
+     * QPS 1941.6 个/s
+     * QPS 1944.1 个/s
+     * <p>
      * GET POST 有什么区别？
      * GET是从服务端请求数据，具有幂等性
      * <a href="/delete?id=1212"></a>
