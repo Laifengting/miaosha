@@ -7,6 +7,8 @@ public class RedisConstants {
      */
     public static final String SPILT = ":";
     
+    public static final String EMPTY_STRING = "";
+    
     //================================== Redis 数据库 ==================================//
     
     /**

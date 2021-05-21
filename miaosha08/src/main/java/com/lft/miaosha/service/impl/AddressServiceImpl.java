@@ -35,13 +35,13 @@ public class AddressServiceImpl implements AddressService {
         // 从缓存中获取
         List<Address> list = redisService.get(AddressKeyPrefix.KEY_PREFIX_GET_ALL_ADDRS_BY_UID, "" + userId, List.class);
         // 缓存中不为空，直接返回
-        if (list.size() > 0) {
+        if (list != null) {
             return list;
         }
         // 缓存中没有数据，从数据库获取
         list = addressMapper.selectAllByUserId(userId);
         // 数据库不为空
-        if (list.size() > 0) {
+        if (list != null) {
             // 保存到缓存
             redisService.set(AddressKeyPrefix.KEY_PREFIX_GET_ALL_ADDRS_BY_UID, "" + userId, list);
         }

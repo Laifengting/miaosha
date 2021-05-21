@@ -35,13 +35,13 @@ public class GoodsServiceImpl implements GoodsService {
         // 从缓存中读取数据
         List<GoodsVo> list = redisService.get(GoodsKeyPrefix.KEY_PREFIX_GET_ALL_GOODSVOS, "", List.class);
         // 缓存中有数据直接返回
-        if (list.size() > 0) {
+        if (list != null) {
             return list;
         }
         // 缓存中没有数据查询数据库
         list = goodsMapper.selectAllGoodsVo();
         // 数据库中有数据保存到缓存
-        if (list.size() > 0) {
+        if (list != null) {
             redisService.set(GoodsKeyPrefix.KEY_PREFIX_GET_ALL_GOODSVOS, "", list);
         }
         // 返回

@@ -1,5 +1,6 @@
 package com.lft.miaosha.service.impl;
 
+import com.lft.miaosha.common.constant.RedisConstants;
 import com.lft.miaosha.common.exception.ExceptionCode;
 import com.lft.miaosha.common.key.impl.MSOrderKeyPrefix;
 import com.lft.miaosha.dao.MiaoshaOrderMapper;
@@ -105,7 +106,7 @@ public class MiaoshaOrderServiceImpl implements MiaoshaOrderService {
             throw new MsException(ExceptionCode.CREATE_ORDER_EXCEPTION);
         }
         // 数据库插入成功，生成订单对象到缓存中
-        redisService.set(MSOrderKeyPrefix.KEY_PREFIX_GET_MSORDER_BY_UID_GID, "" + miaoshaUser.getId() + ":" + miaoshaGoods
+        redisService.set(MSOrderKeyPrefix.KEY_PREFIX_GET_MSORDER_BY_UID_GID, RedisConstants.EMPTY_STRING + miaoshaUser.getId() + RedisConstants.SPILT + miaoshaGoods
                 .getGoodsId(), miaoshaOrder);
         // 返回订单信息
         return orderInfoVo;

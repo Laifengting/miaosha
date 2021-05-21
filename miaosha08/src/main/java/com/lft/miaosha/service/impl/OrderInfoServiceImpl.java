@@ -53,38 +53,43 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         if (miaoshaUser == null || miaoshaGoods == null) {
             throw new MsException(ExceptionCode.ILLEGAL_ARGUMENT_EXCEPTION);
         }
+        
         OrderInfo orderInfo = new OrderInfo();
         orderInfo.setUserId(miaoshaUser.getId());
         orderInfo.setGoodsId(miaoshaGoods.getGoodsId());
         
-        // 从数据库中获取 GoodsVo
+        // 从数据库中获取 GoodsVo 商品信息
         GoodsVo goodsVo = goodsService.getGoodsVoByGoodsId(orderInfo.getGoodsId());
-        
         orderInfo.setGoodsName(goodsVo.getGoodsName());
         orderInfo.setGoodsCount(1);
         orderInfo.setGoodsPrice(miaoshaGoods.getMiaoshaPrice());
         orderInfo.setGmtCreated(new Date());
         orderInfo.setOrderChannel(2);
         orderInfo.setStatus(0);
-        
+        // 从数据库中根据用户 id 获取默认地址信息
         Address address = addressService.getAllByUserId(orderInfo.getUserId()).get(0);
         if (address == null) {
             throw new MsException(ExceptionCode.NULL_ADDRESS_EXCEPTION);
         }
-        
+        // 设置地址
         orderInfo.setDeliveryAddressId(address.getId());
         
+        // 向数据库中插入订单
         Integer result = orderInfoMapper.insert(orderInfo);
+        // 如果插入失败抛出异常
         if (result < 0) {
             throw new MsException(ExceptionCode.CREATE_ORDER_EXCEPTION);
         }
         
-        // 增加详细地址信息
+        // 如果插入订单成功放入到缓存中
+        redisService.set(OrderKeyPrefix.KEY_PREFIX_GET_ORDERINFO_BY_OID, "" + orderInfo.getId(), orderInfo);
+        
+        // 创建 OrderInfoVo 对象，增加详细地址信息
         OrderInfoVo orderInfoVo = new OrderInfoVo();
         BeanUtils.copyProperties(orderInfo, orderInfoVo);
         orderInfoVo.setName(address.getName());
         orderInfoVo.setAddressDetail(address.getAddressDetail());
-        
+        // 返回
         return orderInfoVo;
     }
     
