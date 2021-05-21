@@ -1,7 +1,8 @@
 package com.lft.miaosha.service;
 
+import com.lft.miaosha.entity.po.MiaoshaGoods;
 import com.lft.miaosha.entity.po.MiaoshaUser;
-import com.lft.miaosha.entity.vo.GoodsVo;
+import com.lft.miaosha.entity.po.OrderInfo;
 import com.lft.miaosha.entity.vo.OrderInfoVo;
 
 /**
@@ -16,5 +17,7 @@ import com.lft.miaosha.entity.vo.OrderInfoVo;
  * @since JDK 8
  */
 public interface OrderInfoService {
-    OrderInfoVo addOrder(MiaoshaUser miaoshaUser, GoodsVo goodsVo);
+    OrderInfoVo addOrder(MiaoshaUser miaoshaUser, MiaoshaGoods miaoshaGoods);
+    
+    OrderInfo getOrderInfoById(Long orderId);
 }

@@ -1,5 +1,6 @@
 package com.lft.miaosha.controller;
 
+import com.lft.miaosha.common.result.R;
 import com.lft.miaosha.common.result.ResultCode;
 import com.lft.miaosha.entity.po.MiaoshaGoods;
 import com.lft.miaosha.entity.po.MiaoshaOrder;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Class Name:      GoodsController
@@ -69,15 +72,56 @@ public class MiaoshaOrderController {
             model.addAttribute("errmsg", ResultCode.ORDER_REPEAT_ERROR.getMessage());
             return "miaosha_fail";
         }
-        // 减库存 下订单 写入秒杀订单
-        GoodsVo goodsVo = goodsService.getGoodsVoByGoodsId(goodsId);
-        // 修改一下库存是秒杀商品的库存
-        goodsVo.setStockCount(stockCount);
         
-        OrderInfoVo orderInfoVo = miaoshaOrderService.miaosha(miaoshaUser, goodsVo);
+        // 执行秒杀
+        OrderInfoVo orderInfoVo = miaoshaOrderService.miaosha(miaoshaUser, miaoshaGoods);
         
+        // 获取 GoodVO 详情
+        GoodsVo goodsVo = goodsService.getGoodsVoByGoodsId(miaoshaGoods.getGoodsId());
         model.addAttribute("orderInfo", orderInfoVo);
         model.addAttribute("goods", goodsVo);
         return "order_detail";
+    }
+    
+    /**
+     * GET POST 有什么区别？
+     * GET是从服务端请求数据，具有幂等性
+     * <a href="/delete?id=1212"></a>
+     * POST是向服务端提交数据，不具有幂等性
+     * @param model
+     * @param miaoshaUser
+     * @param goodsId
+     * @return
+     */
+    @RequestMapping (value = "execute/miaosha", method = RequestMethod.POST)
+    @ResponseBody
+    @Transactional
+    public R doMiaosha2(Model model, MiaoshaUser miaoshaUser, @RequestParam ("goodsId") Long goodsId) {
+        if (miaoshaUser == null) {
+            return R.ERROR().code(ResultCode.LOGIN_ERROR.getCode())
+                    .message(ResultCode.LOGIN_ERROR.getMessage());
+        }
+        // 将用户添加到 model 属性中
+        model.addAttribute("user", miaoshaUser);
+        
+        // 获取商品库存
+        MiaoshaGoods miaoshaGoods = miaoshaGoodsService.getMiaoshaGoodsByGoodsId(goodsId);
+        Integer stockCount = miaoshaGoods.getStockCount();
+        if (stockCount <= 0) {
+            return R.ERROR().code(ResultCode.MIAOSHA_OVER_ERROR.getCode())
+                    .message(ResultCode.MIAOSHA_OVER_ERROR.getMessage());
+        }
+        
+        // 判断是否已经秒杀到了
+        MiaoshaOrder order = miaoshaOrderService.getMiaoshaOrderByUserIdGoodsId(miaoshaUser.getId(), goodsId);
+        if (order != null) {
+            return R.ERROR().code(ResultCode.ORDER_REPEAT_ERROR.getCode())
+                    .message(ResultCode.ORDER_REPEAT_ERROR.getMessage());
+        }
+        
+        // 执行秒杀
+        OrderInfoVo orderInfoVo = miaoshaOrderService.miaosha(miaoshaUser, miaoshaGoods);
+        
+        return R.OK().data("orderId", orderInfoVo.getId());
     }
 }

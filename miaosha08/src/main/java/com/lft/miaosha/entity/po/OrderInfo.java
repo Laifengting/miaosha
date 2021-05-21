@@ -20,6 +20,9 @@ public class OrderInfo {
     private Long goodsId;
     private Long deliveryAddressId;
     private String goodsName;
+    /**
+     * 下单数量
+     */
     private Integer goodsCount;
     private BigDecimal goodsPrice;
     private Integer orderChannel;

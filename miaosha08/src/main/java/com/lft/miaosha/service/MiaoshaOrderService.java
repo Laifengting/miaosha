@@ -1,9 +1,8 @@
 package com.lft.miaosha.service;
 
+import com.lft.miaosha.entity.po.MiaoshaGoods;
 import com.lft.miaosha.entity.po.MiaoshaOrder;
 import com.lft.miaosha.entity.po.MiaoshaUser;
-import com.lft.miaosha.entity.po.OrderInfo;
-import com.lft.miaosha.entity.vo.GoodsVo;
 import com.lft.miaosha.entity.vo.OrderInfoVo;
 
 /**
@@ -20,5 +19,5 @@ import com.lft.miaosha.entity.vo.OrderInfoVo;
 public interface MiaoshaOrderService {
     MiaoshaOrder getMiaoshaOrderByUserIdGoodsId(Long id, Long goodsId);
     
-    OrderInfoVo miaosha(MiaoshaUser miaoshaUser, GoodsVo goodsVo);
+    OrderInfoVo miaosha(MiaoshaUser miaoshaUser, MiaoshaGoods miaoshaGoods);
 }

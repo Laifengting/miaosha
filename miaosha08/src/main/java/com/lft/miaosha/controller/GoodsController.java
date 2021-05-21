@@ -1,8 +1,11 @@
 package com.lft.miaosha.controller;
 
 import com.lft.miaosha.common.key.impl.GoodsKeyPrefix;
+import com.lft.miaosha.common.result.R;
+import com.lft.miaosha.common.result.ResultCode;
 import com.lft.miaosha.entity.po.Address;
 import com.lft.miaosha.entity.po.MiaoshaUser;
+import com.lft.miaosha.entity.vo.GoodsDetailsVo;
 import com.lft.miaosha.entity.vo.GoodsVo;
 import com.lft.miaosha.service.AddressService;
 import com.lft.miaosha.service.GoodsService;
@@ -19,8 +22,10 @@ import org.thymeleaf.context.IWebContext;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -89,40 +94,37 @@ public class GoodsController {
     // 页面缓存步骤：3
     @ResponseBody
     public String toList(Model model, MiaoshaUser miaoshaUser, HttpServletRequest request, HttpServletResponse response) {
-        if (miaoshaUser == null) {
-            return "login";
-        } else {
-            // 将用户添加到 model 属性中
-            model.addAttribute("user", miaoshaUser);
-            
-            // 页面缓存步骤：4
-            // 从缓存中取页面
-            String html = redisService.get(GoodsKeyPrefix.KEY_PREFIX_GOODS_LIST, "all:goods", String.class);
-            // 如果缓存中有页面直接返回
-            if (StringUtils.isNotEmpty(html)) {
-                // 页面缓存步骤：5
-                return html;
-            }
-            
-            // 页面缓存步骤：6
-            // 如果缓存中没有页面，进行手动渲染
-            // 查询商品列表
-            List<GoodsVo> allGoods = goodsService.getAllGoods();
-            model.addAttribute("goodsList", allGoods);
-            
-            // SpringWebContext context = new SpringWebContext() 类过期，使用 WebContext
-            IWebContext context = new WebContext(request, response, request.getServletContext(), request.getLocale(), model.asMap());
-            // 页面缓存步骤：7
-            // 手动渲染
-            html = thymeleafViewResolver.getTemplateEngine().process("goods", context);
-            if (StringUtils.isNotEmpty(html)) {
-                // 页面缓存步骤：8
-                // 保存到缓存中
-                redisService.set(GoodsKeyPrefix.KEY_PREFIX_GOODS_LIST, "all:goods", html);
-            }
-            // 页面缓存步骤：9
+        
+        // 将用户添加到 model 属性中
+        model.addAttribute("user", miaoshaUser);
+        
+        // 页面缓存步骤：4
+        // 从缓存中取页面
+        String html = redisService.get(GoodsKeyPrefix.KEY_PREFIX_GET_HTML_FOR_GOODS_LIST, "all:goods", String.class);
+        // 如果缓存中有页面直接返回
+        if (StringUtils.isNotEmpty(html)) {
+            // 页面缓存步骤：5
             return html;
         }
+        
+        // 页面缓存步骤：6
+        // 如果缓存中没有页面，进行手动渲染
+        // 查询商品列表
+        List<GoodsVo> allGoods = goodsService.getAllGoods();
+        model.addAttribute("goodsList", allGoods);
+        
+        // SpringWebContext context = new SpringWebContext() 类过期，使用 WebContext
+        IWebContext context = new WebContext(request, response, request.getServletContext(), request.getLocale(), model.asMap());
+        // 页面缓存步骤：7
+        // 手动渲染
+        html = thymeleafViewResolver.getTemplateEngine().process("goods", context);
+        if (StringUtils.isNotEmpty(html)) {
+            // 页面缓存步骤：8
+            // 保存到缓存中
+            redisService.set(GoodsKeyPrefix.KEY_PREFIX_GET_HTML_FOR_GOODS_LIST, "all:goods", html);
+        }
+        // 页面缓存步骤：9
+        return html;
     }
     
     /**
@@ -141,8 +143,8 @@ public class GoodsController {
     @RequestMapping (value = "to/detail/{goodsId}", produces = "text/html;charset=utf-8")
     // RUL缓存步骤：2
     @ResponseBody
-    public String toDetail(Model model, MiaoshaUser miaoshaUser, @PathVariable ("goodsId") Long goodsId, HttpServletRequest request,
-                           HttpServletResponse response) {
+    public String toDetail2(Model model, MiaoshaUser miaoshaUser, @PathVariable ("goodsId") Long goodsId, HttpServletRequest request,
+                            HttpServletResponse response) {
         if (miaoshaUser == null) {
             return "login";
         } else {
@@ -151,7 +153,7 @@ public class GoodsController {
             
             // RUL缓存步骤：3
             // 从缓存中取页面
-            String html = redisService.get(GoodsKeyPrefix.KEY_PREFIX_GOODS_DETAIL, "" + goodsId, String.class);
+            String html = redisService.get(GoodsKeyPrefix.KEY_PREFIX_GET_HTML_FOR_GOODS_DETAIL_BY_GID, "" + goodsId, String.class);
             if (StringUtils.isNotEmpty(html)) {
                 return html;
             }
@@ -199,10 +201,71 @@ public class GoodsController {
             if (StringUtils.isNotEmpty(html)) {
                 // RUL缓存步骤：6
                 // 保存到缓存中
-                redisService.set(GoodsKeyPrefix.KEY_PREFIX_GOODS_DETAIL, "" + goodsId, html);
+                redisService.set(GoodsKeyPrefix.KEY_PREFIX_GET_HTML_FOR_GOODS_DETAIL_BY_GID, "" + goodsId, html);
             }
             // RUL缓存步骤：7
             return html;
         }
     }
+    
+    /**
+     * JMeter 压测 5000*10 三次
+     * QPS 2487.9 个/s
+     * QPS 3573.5 个/s
+     * QPS 4384.4 个/s
+     * @param model
+     * @param miaoshaUser
+     * @param goodsId
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping (value = "to/goods/detail/{goodsId}")
+    @ResponseBody
+    public R toDetail(Model model, MiaoshaUser miaoshaUser, @PathVariable ("goodsId") Long goodsId,
+                      HttpServletRequest request,
+                      HttpServletResponse response) throws ServletException, IOException {
+        if (miaoshaUser == null) {
+            return R.ERROR().code(ResultCode.LOGIN_ERROR.getCode())
+                    .message(ResultCode.LOGIN_ERROR.getMessage());
+        }
+        // 查询商品详情
+        GoodsVo goods = goodsService.getGoodsVoByGoodsId(goodsId);
+        
+        // 查询当前用户的默认地址
+        Address userAddress = addressService.getDefaultAddress(miaoshaUser.getId());
+        // 秒杀时间
+        long startTime = goods.getStartDate().getTime();
+        long endTime = goods.getEndDate().getTime();
+        
+        long now = System.currentTimeMillis();
+        
+        int miaoshaStatus = 0;
+        int remainSeconds = 0;
+        
+        // 秒杀还没开始，倒计时
+        if (now < startTime) {
+            miaoshaStatus = 0;
+            remainSeconds = (int) ((startTime - now) / 1000);
+        }
+        // 秒杀已经结束
+        else if (now > endTime) {
+            miaoshaStatus = 2;
+            remainSeconds = -1;
+        }
+        // 秒杀正在进行
+        else {
+            miaoshaStatus = 1;
+            remainSeconds = 0;
+        }
+        GoodsDetailsVo goodsDetailsVo = new GoodsDetailsVo();
+        goodsDetailsVo.setGoods(goods);
+        goodsDetailsVo.setUser(miaoshaUser);
+        goodsDetailsVo.setUserAddress(userAddress);
+        goodsDetailsVo.setMiaoshaStatus(miaoshaStatus);
+        goodsDetailsVo.setRemainSeconds(remainSeconds);
+        
+        return R.OK().data("goodsDetailsVo", goodsDetailsVo);
+    }
+    
 }

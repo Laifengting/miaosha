@@ -35,32 +35,38 @@ public class GlobalExceptionHandler {
     
     @ExceptionHandler (value = MsException.class)
     public R msExceptionHandler(MsException e) {
+        e.printStackTrace();
         return R.ERROR().code(e.getExceptionCode().getCode()).message(e.getExceptionCode().getMessage());
     }
     
     @ExceptionHandler (value = NullPointerException.class)
     public R nullPointerExceptionHandler(NullPointerException e) {
+        e.printStackTrace();
         return R.ERROR().code(ExceptionCode.NULL_POINTER_EXCEPTION.getCode()).message(ExceptionCode.NULL_POINTER_EXCEPTION.getMessage());
     }
     
     @ExceptionHandler (value = IllegalArgumentException.class)
     public R illegalArgumentExceptionHandler(IllegalArgumentException e) {
+        e.printStackTrace();
         return R.ERROR().code(ExceptionCode.ILLEGAL_ARGUMENT_EXCEPTION.getCode())
                 .message(ExceptionCode.ILLEGAL_ARGUMENT_EXCEPTION.getMessage());
     }
     
     @ExceptionHandler (value = BindException.class)
     public R bindExceptionHandler(BindException e) {
+        e.printStackTrace();
         return R.ERROR().code(ExceptionCode.BIND_EXCEPTION.getCode()).message(ExceptionCode.BIND_EXCEPTION.getMessage());
     }
     
     @ExceptionHandler (value = ArithmeticException.class)
     public R arithmeticExceptionHandler(ArithmeticException e) {
+        e.printStackTrace();
         return R.ERROR().code(ExceptionCode.ARITHMETIC_EXCEPTION.getCode()).message(ExceptionCode.ARITHMETIC_EXCEPTION.getMessage());
     }
     
     @ExceptionHandler (value = ArrayIndexOutOfBoundsException.class)
     public R arrayIndexOutOfBoundsException(ArrayIndexOutOfBoundsException e) {
+        e.printStackTrace();
         return R.ERROR().code(ExceptionCode.ARITHMETIC_EXCEPTION.getCode()).message(ExceptionCode.ARITHMETIC_EXCEPTION.getMessage());
     }
 }

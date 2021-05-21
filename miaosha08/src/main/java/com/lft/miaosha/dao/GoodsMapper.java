@@ -22,7 +22,7 @@ import java.util.List;
 public interface GoodsMapper {
     List<GoodsVo> selectAllGoodsVo();
     
-    GoodsVo selectGoodsVoByGoodsId(Long goodsId);
+    GoodsVo selectGoodsVoByGoodsId(@Param ("goodsId") Long goodsId);
     
     Integer insertGoods(Goods goods);
     

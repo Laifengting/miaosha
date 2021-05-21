@@ -1,15 +1,19 @@
 package com.lft.miaosha.service.impl;
 
 import com.lft.miaosha.common.exception.ExceptionCode;
+import com.lft.miaosha.common.key.impl.OrderKeyPrefix;
 import com.lft.miaosha.dao.OrderInfoMapper;
 import com.lft.miaosha.entity.po.Address;
+import com.lft.miaosha.entity.po.MiaoshaGoods;
 import com.lft.miaosha.entity.po.MiaoshaUser;
 import com.lft.miaosha.entity.po.OrderInfo;
 import com.lft.miaosha.entity.vo.GoodsVo;
 import com.lft.miaosha.entity.vo.OrderInfoVo;
 import com.lft.miaosha.exception.MsException;
 import com.lft.miaosha.service.AddressService;
+import com.lft.miaosha.service.GoodsService;
 import com.lft.miaosha.service.OrderInfoService;
+import com.lft.miaosha.service.RedisService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,20 +41,28 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Autowired
     private AddressService addressService;
     
+    @Autowired
+    private GoodsService goodsService;
+    
+    @Autowired
+    private RedisService redisService;
+    
     @Override
     @Transactional
-    public OrderInfoVo addOrder(MiaoshaUser miaoshaUser, GoodsVo goodsVo) {
-        if (miaoshaUser == null || goodsVo == null) {
+    public OrderInfoVo addOrder(MiaoshaUser miaoshaUser, MiaoshaGoods miaoshaGoods) {
+        if (miaoshaUser == null || miaoshaGoods == null) {
             throw new MsException(ExceptionCode.ILLEGAL_ARGUMENT_EXCEPTION);
         }
         OrderInfo orderInfo = new OrderInfo();
         orderInfo.setUserId(miaoshaUser.getId());
+        orderInfo.setGoodsId(miaoshaGoods.getGoodsId());
         
-        orderInfo.setGoodsId(goodsVo.getId());
+        // 从数据库中获取 GoodsVo
+        GoodsVo goodsVo = goodsService.getGoodsVoByGoodsId(orderInfo.getGoodsId());
+        
         orderInfo.setGoodsName(goodsVo.getGoodsName());
         orderInfo.setGoodsCount(1);
-        orderInfo.setGoodsPrice(goodsVo.getMiaoshaPrice());
-        
+        orderInfo.setGoodsPrice(miaoshaGoods.getMiaoshaPrice());
         orderInfo.setGmtCreated(new Date());
         orderInfo.setOrderChannel(2);
         orderInfo.setStatus(0);
@@ -74,5 +86,24 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         orderInfoVo.setAddressDetail(address.getAddressDetail());
         
         return orderInfoVo;
+    }
+    
+    @Override
+    public OrderInfo getOrderInfoById(Long orderId) {
+        // 从缓存中获取订单详情
+        OrderInfo orderInfo = redisService.get(OrderKeyPrefix.KEY_PREFIX_GET_ORDERINFO_BY_OID, "" + orderId, OrderInfo.class);
+        // 缓存中有数据直接返回
+        if (orderInfo != null) {
+            return orderInfo;
+        }
+        // 缓存中没有从数据库中查询
+        orderInfo = orderInfoMapper.selectById(orderId);
+        
+        // 如果数据库中不为空，放到缓存中一份
+        if (orderInfo != null) {
+            redisService.set(OrderKeyPrefix.KEY_PREFIX_GET_ORDERINFO_BY_OID, "" + orderId, orderInfo);
+        }
+        
+        return orderInfo;
     }
 }

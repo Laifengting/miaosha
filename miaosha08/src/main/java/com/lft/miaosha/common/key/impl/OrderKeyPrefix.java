@@ -16,11 +16,13 @@ import com.lft.miaosha.common.key.ExpireSeconds;
  */
 public class OrderKeyPrefix extends BaseKeyPrefix {
     // 过期时间是7天
-    public static OrderKeyPrefix KEY_PREFIX_ORDER_ID = new OrderKeyPrefix(ExpireSeconds.WEEK, RedisConstants.ORDER_KEY_SUFFIX_ORDER_ID);
-    public static OrderKeyPrefix KEY_PREFIX_ADDRESS = new OrderKeyPrefix(ExpireSeconds.WEEK, RedisConstants.ORDER_KEY_SUFFIX_ADDRESS);
+    public static OrderKeyPrefix KEY_PREFIX_GET_ORDERINFO_BY_OID =
+            new OrderKeyPrefix(ExpireSeconds.WEEK, RedisConstants.ORDER_KEY_SUFFIX_GET_ORDERINFO_BY_OID);
+    
     public OrderKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);
     }
+    
     public OrderKeyPrefix(String prefix) {
         super(prefix);
     }

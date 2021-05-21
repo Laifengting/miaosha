@@ -41,9 +41,9 @@
     <update id = "reduceStock">
         UPDATE miaosha_goods
         SET
-            stock_count  = #{stockCount},
+            stock_count  = stock_count - 1,
             gmt_modified = #{gmtModified}
-            WHERE goods_id = #{goodsId}
+            WHERE goods_id = #{goodsId} AND stock_count > 0
     </update>
 
     <!-- boolean deleteMiaoshaGoodsById(@Param ("goodsId") Long goodsId); -->

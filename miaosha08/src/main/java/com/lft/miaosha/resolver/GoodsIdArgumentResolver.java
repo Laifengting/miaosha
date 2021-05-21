@@ -1,7 +1,6 @@
-package com.lft.miaosha.config;
+package com.lft.miaosha.resolver;
 
 import com.lft.miaosha.common.constant.RedisConstants;
-import com.lft.miaosha.entity.po.MiaoshaUser;
 import com.lft.miaosha.service.MiaoshaUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,14 @@ import javax.servlet.http.HttpServletResponse;
  * @since JDK 8
  */
 @Component
-public class UserArgumentResolver implements HandlerMethodArgumentResolver {
+public class GoodsIdArgumentResolver implements HandlerMethodArgumentResolver {
     @Autowired
     MiaoshaUserService miaoshaUserService;
     
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
         Class<?> parameterType = parameter.getParameterType();
-        return parameterType == MiaoshaUser.class;
+        return parameterType == Long.class;
     }
     
     @Override
@@ -46,19 +45,11 @@ public class UserArgumentResolver implements HandlerMethodArgumentResolver {
         
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
         HttpServletResponse response = webRequest.getNativeResponse(HttpServletResponse.class);
-        String paramToken = request.getParameter(RedisConstants.USER_KEY_SUFFIX_TOKEN);
-        String cookieToken = getCookieValue(request, RedisConstants.USER_KEY_SUFFIX_TOKEN);
-        
-        // 如果都是空返回登录页面
-        if (StringUtils.isEmpty(paramToken) && StringUtils.isEmpty(cookieToken)) {
+        String goodsId = request.getParameter(RedisConstants.GOODS_KEY_SUFFIX_GOODS_ID);
+        if (StringUtils.isEmpty(goodsId)) {
             return null;
         }
-        // 参数优先于缓存
-        String token = StringUtils.isNotEmpty(paramToken) ? paramToken : cookieToken;
-        return miaoshaUserService.getUserFromCache(token, response);
-    }
-    
-    private String getCookieValue(HttpServletRequest request, String cookieNameToken) {
-        return miaoshaUserService.getTokenFromCookie(request, cookieNameToken);
+        Long result = Long.parseLong(goodsId);
+        return result;
     }
 }

@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Class Name:      LoginController
  * Package Name:    com.lft.miaosha.controller
@@ -29,7 +32,7 @@ public class LogoutController {
     MiaoshaUserService miaoshaUserService;
     
     @RequestMapping ("to/logout")
-    public String toLogin(Model model, MiaoshaUser miaoshaUser) {
+    public String toLogin(Model model, MiaoshaUser miaoshaUser, HttpServletRequest request, HttpServletResponse response) {
         miaoshaUser = null;
         model.addAttribute("user", miaoshaUser);
         return "login";

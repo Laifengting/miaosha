@@ -19,4 +19,25 @@ CREATE TABLE miaosha_order (
 	COMMENT ='秒杀订单表'
 	AUTO_INCREMENT = 3;
 
+# 创建唯一索引约束（u_uid_gid 约束名）
+ALTER TABLE miaosha_order
+	ADD CONSTRAINT u_uid_gid UNIQUE KEY (user_id, goods_id);
+
+# 删除约束
+ALTER TABLE miaosha_order
+	DROP KEY miaosha_order_un;
+
+# 创建外键（级联CASCADE/约束RESTRICT/设空 SET NULL/设置为默认SET DEFAULT）
+ALTER TABLE miaosha_order
+	ADD CONSTRAINT miaosha_order_fk FOREIGN KEY (goods_id)
+		REFERENCES miaosha_goods(id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE;
+
+# 创建索引
+CREATE INDEX miaosha_order_user_id_idx USING BTREE ON miaosha_order(user_id);
+
+# 创建联合索引
+CREATE INDEX miaosha_order_user_id_idx USING BTREE ON miaosha_order(user_id, order_id, goods_id);
+
 

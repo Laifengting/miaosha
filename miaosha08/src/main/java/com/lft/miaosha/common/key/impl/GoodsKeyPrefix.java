@@ -16,8 +16,18 @@ import com.lft.miaosha.common.key.ExpireSeconds;
  */
 public class GoodsKeyPrefix extends BaseKeyPrefix {
     // 过期时间是1天
-    public static GoodsKeyPrefix KEY_PREFIX_GOODS_LIST = new GoodsKeyPrefix(ExpireSeconds.MINUTE, RedisConstants.GOODS_KEY_SUFFIX_GOODS_LIST);
-    public static GoodsKeyPrefix KEY_PREFIX_GOODS_DETAIL = new GoodsKeyPrefix(ExpireSeconds.MINUTE, RedisConstants.GOODS_KEY_SUFFIX_GOODS_DETAIL);
+    public static GoodsKeyPrefix KEY_PREFIX_GET_GOODSVO_BY_GOODS_ID =
+            new GoodsKeyPrefix(ExpireSeconds.DAY, RedisConstants.GOODS_KEY_SUFFIX_GET_GOODSVO_BY_GOODS_ID);
+    
+    public static GoodsKeyPrefix KEY_PREFIX_GET_ALL_GOODSVOS =
+            new GoodsKeyPrefix(ExpireSeconds.DAY, RedisConstants.GOODS_KEY_SUFFIX_GET_ALL_GOODSVOS);
+    
+    // 过期时间是1分钟
+    public static GoodsKeyPrefix KEY_PREFIX_GET_HTML_FOR_GOODS_LIST =
+            new GoodsKeyPrefix(ExpireSeconds.MINUTE, RedisConstants.GOODS_KEY_SUFFIX_GET_HTML_FOR_GOODS_LIST);
+    
+    public static GoodsKeyPrefix KEY_PREFIX_GET_HTML_FOR_GOODS_DETAIL_BY_GID =
+            new GoodsKeyPrefix(ExpireSeconds.MINUTE, RedisConstants.GOODS_KEY_SUFFIX_GET_HTML_FOR_GOODS_DETAIL_BY_GID);
     
     private GoodsKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);
