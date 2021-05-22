@@ -18,6 +18,7 @@
         <module>miaosha06-jar</module>
         <module>miaosha07</module>
         <module>miaosha08</module>
+        <module>miaosha09</module>
     </modules>
     <groupId>com.lft</groupId>
     <artifactId>miaosha</artifactId>
