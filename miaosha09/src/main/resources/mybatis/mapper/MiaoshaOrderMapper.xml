@@ -10,9 +10,19 @@
             FROM miaosha_order
             WHERE user_id = #{userId} AND goods_id = #{goodsId}
     </select>
+    <!-- MiaoshaOrder selectByUidGid(@Param ("userId") Long userId, @Param ("goodsId") Long goodsId); -->
+    <select id = "selectByUidGid"
+            resultType = "com.lft.miaosha.entity.po.MiaoshaOrder">
+        SELECT *
+            FROM miaosha_order
+            WHERE user_id = #{userId} AND goods_id = #{goodsId}
+    </select>
 
     <!-- Integer addMiaoshaOrder(OrderInfo orderInfo); -->
-    <insert id = "addMiaoshaOrder">
+    <insert id = "addMiaoshaOrder"
+            keyColumn = "id"
+            keyProperty = "id"
+            useGeneratedKeys = "true">
         INSERT INTO miaosha_order(user_id, order_id, goods_id, gmt_created)
             VALUES (#{userId}, #{orderId}, #{goodsId}, #{gmtCreated})
     </insert>

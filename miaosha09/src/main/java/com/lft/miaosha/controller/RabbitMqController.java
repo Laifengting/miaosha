@@ -1,11 +1,9 @@
 package com.lft.miaosha.controller;
 
-import com.lft.miaosha.common.result.R;
-import com.lft.miaosha.rabbitmq.MQSender;
+import com.lft.miaosha.service.impl.MqSenderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Class Name:      SimpleController
@@ -23,40 +21,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RabbitMqController {
     
     @Autowired
-    private MQSender mqSender;
-    
-    @RequestMapping ("/mq/default")
-    @ResponseBody
-    public R mq1() {
-        mqSender.sendDefaultMessage("Hello,I'm RabbitMQ,I'm sending Message!!!!!");
-        return R.OK().message("Hello, RabbitMQ");
-    }
-    
-    @RequestMapping ("/mq/direct")
-    @ResponseBody
-    public R mq2() {
-        mqSender.sendDirectMessage("Hello,I'm RabbitMQ,I'm sending Message!!!!!");
-        return R.OK().message("Hello, RabbitMQ");
-    }
-    
-    @RequestMapping ("/mq/topic")
-    @ResponseBody
-    public R mq3() {
-        mqSender.sendTopicMessage("Hello,I'm RabbitMQ,I'm sending Message!!!!!");
-        return R.OK().message("Hello, RabbitMQ");
-    }
-    
-    @RequestMapping ("/mq/fanout")
-    @ResponseBody
-    public R mq4() {
-        mqSender.sendFanoutMessage("Hello,I'm RabbitMQ,I'm sending Message!!!!!");
-        return R.OK().message("Hello, RabbitMQ");
-    }
-    
-    @RequestMapping ("/mq/headers")
-    @ResponseBody
-    public R mq5() {
-        mqSender.sendHeaderMessage("Hello,I'm RabbitMQ,I'm sending Message!!!!!");
-        return R.OK().message("Hello, RabbitMQ");
-    }
+    private MqSenderServiceImpl mqSenderServiceImpl;
+    //
+    // @RequestMapping ("/mq/default")
+    // @ResponseBody
+    // public R mq1() {
+    //     mqSenderServiceImpl.sendDefaultMessage("Hello,I'm RabbitMQ,I'm sending Message!!!!!");
+    //     return R.OK().message("Hello, RabbitMQ");
+    // }
+    //
+    // @RequestMapping ("/mq/direct")
+    // @ResponseBody
+    // public R mq2() {
+    //     mqSenderServiceImpl.sendDirectMessage("Hello,I'm RabbitMQ,I'm sending Message!!!!!");
+    //     return R.OK().message("Hello, RabbitMQ");
+    // }
+    //
+    // @RequestMapping ("/mq/topic")
+    // @ResponseBody
+    // public R mq3() {
+    //     mqSenderServiceImpl.sendTopicMessage("Hello,I'm RabbitMQ,I'm sending Message!!!!!");
+    //     return R.OK().message("Hello, RabbitMQ");
+    // }
+    //
+    // @RequestMapping ("/mq/fanout")
+    // @ResponseBody
+    // public R mq4() {
+    //     mqSenderServiceImpl.sendFanoutMessage("Hello,I'm RabbitMQ,I'm sending Message!!!!!");
+    //     return R.OK().message("Hello, RabbitMQ");
+    // }
+    //
+    // @RequestMapping ("/mq/headers")
+    // @ResponseBody
+    // public R mq5() {
+    //     mqSenderServiceImpl.sendHeaderMessage("Hello,I'm RabbitMQ,I'm sending Message!!!!!");
+    //     return R.OK().message("Hello, RabbitMQ");
+    // }
 }

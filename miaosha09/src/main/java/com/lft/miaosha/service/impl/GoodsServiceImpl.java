@@ -51,7 +51,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public GoodsVo getGoodsVoByGoodsId(Long goodsId) {
         // 从缓存中读取数据
-        GoodsVo goodsVo = redisService.get(GoodsKeyPrefix.KEY_PREFIX_GET_GOODSVO_BY_GOODS_ID, "" + goodsId, GoodsVo.class);
+        GoodsVo goodsVo = redisService.get(GoodsKeyPrefix.KEY_PREFIX_GET_GOODSVO_BY_GID, "" + goodsId, GoodsVo.class);
         // 如果缓存中不为空直接返回
         if (goodsVo != null) {
             return goodsVo;
@@ -60,7 +60,7 @@ public class GoodsServiceImpl implements GoodsService {
         goodsVo = goodsMapper.selectGoodsVoByGoodsId(goodsId);
         // 数据库中不为空，放一份到缓存中
         if (goodsVo != null) {
-            redisService.set(GoodsKeyPrefix.KEY_PREFIX_GET_GOODSVO_BY_GOODS_ID, "" + goodsId, goodsVo);
+            redisService.set(GoodsKeyPrefix.KEY_PREFIX_GET_GOODSVO_BY_GID, "" + goodsId, goodsVo);
         }
         // 返回结果
         return goodsVo;

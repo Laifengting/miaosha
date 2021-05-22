@@ -182,6 +182,7 @@
             }
         }
 
+        // 执行秒杀
         function doMiaosha() {
             $.ajax({
                 url: "/miaosha/execute/miaosha",
@@ -190,11 +191,10 @@
                     goodsId: $("#goodsId").val()
                 },
                 success: function (response) {
-                    // 响应码是 200000 表示请求成功
-                    if (response.code == 200000) {
-                        var orderId = response.data.orderId
-                        layer.msg("秒杀成功");
-                        window.location.href = "/pages/order_detail.htm?orderId=" + orderId;
+                    // 响应码是 300000 表示正在排队秒杀中
+                    if (response.code == 300000) {
+                        // 进行轮询
+                        getMiaoshaResult($("#goodsId").val());
                     } else {
                         layer.msg(response.msg);
                     }
@@ -202,7 +202,49 @@
                 error: function () {
                     layer.msg("秒杀失败");
                 }
+            });
+        }
 
+        // 获取秒杀结果
+        function getMiaoshaResult(goodsId) {
+            g_showLoading();
+            $.ajax({
+                url: "/miaosha/get/miaosha/result",
+                type: "GET",
+                data: {
+                    goodsId: $("#goodsId").val()
+                },
+                success: function (response) {
+                    if (response.code == 200000) {
+                        var result = response.data.result
+                        if (result < 0) {
+                            layer.msg("秒杀失败");
+                        }
+                        // 继续轮询
+                        else if (result == 0) {
+                            // 计时循环轮询
+                            setTimeout(function () {
+                                getMiaoshaResult(goodsId);
+                            }, 100);
+                        } else {
+                            layer.confirm("恭喜您，秒杀成功!",
+                                {btn: ["查看订单", "返回商品"]},
+                                function () {
+                                    window.location.href = "/pages/order_detail.htm?orderId=" + result;
+                                },
+                                function () {
+                                    window.location.href = "/goods/to/goods/detail/" + goodsId;
+                                    // 关闭弹窗
+                                    // layer.closeAll();
+                                });
+                        }
+                    } else {
+                        layer.msg(response.msg);
+                    }
+                },
+                error: function () {
+                    layer.msg("秒杀失败");
+                }
             });
         }
     </script>

@@ -1,4 +1,4 @@
-package com.lft.miaosha.rabbitmq;
+package com.lft.miaosha.config;
 
 import com.lft.miaosha.common.constant.RabbitMqConstants;
 import org.springframework.amqp.core.Binding;
@@ -26,7 +26,7 @@ import java.util.Map;
  * @since JDK 8
  */
 @Configuration
-public class MQConfig {
+public class RabbitMqConfig {
     
     //==================================================== 创建队列 ====================================================//
     
@@ -68,6 +68,16 @@ public class MQConfig {
     public Queue topicQueue2() {
         // name:队列名称，是否是持久队列（重启之后消息会保存）。
         return new Queue(RabbitMqConstants.TOPIC_QUEUE_2, true);
+    }
+    
+    /**
+     * TopicExchange 模式交换机  Miaosha 使用的队列
+     * @return
+     */
+    @Bean
+    public Queue miaoshaTopicQueue() {
+        // name:队列名称，是否是持久队列（重启之后消息会保存）。
+        return new Queue(RabbitMqConstants.MIAOSHA_QUEUE, true);
     }
     
     /**
@@ -165,6 +175,15 @@ public class MQConfig {
     @Bean
     public Binding topicQueueBinding2() {
         return BindingBuilder.bind(topicQueue2()).to(topicExchange()).with(RabbitMqConstants.ROUTING_KEY_TOPIC_2);
+    }
+    
+    /**
+     * 绑定 miaoshaTopicQueue 到 topic Exchange 交换机2
+     * @return
+     */
+    @Bean
+    public Binding miaoshaTopicQueueBinding() {
+        return BindingBuilder.bind(miaoshaTopicQueue()).to(topicExchange()).with(RabbitMqConstants.ROUTING_KEY_MIAOSHA);
     }
     
     /**

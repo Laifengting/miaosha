@@ -1,6 +1,5 @@
 package com.lft.miaosha.dao;
 
-import com.lft.miaosha.entity.po.MiaoshaGoods;
 import com.lft.miaosha.entity.po.MiaoshaOrder;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,4 +20,6 @@ public interface MiaoshaOrderMapper {
     MiaoshaOrder selectMiaoshaOrderByUserIdGoodsId(@Param ("userId") Long userId, @Param ("goodsId") Long goodsId);
     
     Integer addMiaoshaOrder(MiaoshaOrder miaoshaOrder);
+    
+    MiaoshaOrder selectByUidGid(@Param ("userId") Long userId, @Param ("goodsId") Long goodsId);
 }

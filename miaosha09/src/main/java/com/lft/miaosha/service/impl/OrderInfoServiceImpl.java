@@ -1,6 +1,5 @@
 package com.lft.miaosha.service.impl;
 
-import com.lft.miaosha.common.exception.ExceptionCode;
 import com.lft.miaosha.common.key.impl.OrderKeyPrefix;
 import com.lft.miaosha.dao.OrderInfoMapper;
 import com.lft.miaosha.entity.po.Address;
@@ -9,7 +8,6 @@ import com.lft.miaosha.entity.po.MiaoshaUser;
 import com.lft.miaosha.entity.po.OrderInfo;
 import com.lft.miaosha.entity.vo.GoodsVo;
 import com.lft.miaosha.entity.vo.OrderInfoVo;
-import com.lft.miaosha.exception.MsException;
 import com.lft.miaosha.service.AddressService;
 import com.lft.miaosha.service.GoodsService;
 import com.lft.miaosha.service.OrderInfoService;
@@ -51,7 +49,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Transactional
     public OrderInfoVo addOrder(MiaoshaUser miaoshaUser, MiaoshaGoods miaoshaGoods) {
         if (miaoshaUser == null || miaoshaGoods == null) {
-            throw new MsException(ExceptionCode.ILLEGAL_ARGUMENT_EXCEPTION);
+            return null;
         }
         
         OrderInfo orderInfo = new OrderInfo();
@@ -69,7 +67,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         // 从数据库中根据用户 id 获取默认地址信息
         Address address = addressService.getAllByUserId(orderInfo.getUserId()).get(0);
         if (address == null) {
-            throw new MsException(ExceptionCode.NULL_ADDRESS_EXCEPTION);
+            return null;
         }
         // 设置地址
         orderInfo.setDeliveryAddressId(address.getId());
@@ -78,7 +76,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         Integer result = orderInfoMapper.insert(orderInfo);
         // 如果插入失败抛出异常
         if (result < 0) {
-            throw new MsException(ExceptionCode.CREATE_ORDER_EXCEPTION);
+            return null;
         }
         
         // 如果插入订单成功放入到缓存中

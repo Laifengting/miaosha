@@ -84,7 +84,7 @@ public class OrderInfoController {
     
     private GoodsVo getGoodsVoFromCacheOrDbAndSetToCache(OrderInfo orderInfo) {
         // 从缓存中取
-        GoodsVo goodsVo = redisService.get(GoodsKeyPrefix.KEY_PREFIX_GET_GOODSVO_BY_GOODS_ID, "" + orderInfo.getGoodsId(), GoodsVo.class);
+        GoodsVo goodsVo = redisService.get(GoodsKeyPrefix.KEY_PREFIX_GET_GOODSVO_BY_GID, "" + orderInfo.getGoodsId(), GoodsVo.class);
         // 缓存中如果没有
         if (goodsVo == null) {
             // 从数据库中取
@@ -94,7 +94,7 @@ public class OrderInfoController {
                 throw new MsException(ExceptionCode.NULL_OBJECT_EXCEPTION);
             }
             // 数据库中有，先保存到缓存
-            redisService.set(GoodsKeyPrefix.KEY_PREFIX_GET_GOODSVO_BY_GOODS_ID, "" + orderInfo.getGoodsId(), goodsVo);
+            redisService.set(GoodsKeyPrefix.KEY_PREFIX_GET_GOODSVO_BY_GID, "" + orderInfo.getGoodsId(), goodsVo);
             // 然后返回
             return goodsVo;
         } else {

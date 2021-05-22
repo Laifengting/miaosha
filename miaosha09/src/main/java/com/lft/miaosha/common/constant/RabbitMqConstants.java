@@ -16,53 +16,57 @@ public class RabbitMqConstants {
     /**
      * 用于Drect模式交换机的队列
      */
-    public static final String DEFAULT_QUEUE = "default_queue";
+    public static final String DEFAULT_QUEUE = "default.queue";
     /**
      * 用于Drect模式交换机的队列
      */
-    public static final String DIRECT_QUEUE = "direct_queue";
+    public static final String DIRECT_QUEUE = "direct.queue";
     /**
      * 用于Topic模式交换机的队列 1
      */
-    public static final String TOPIC_QUEUE_1 = "topic_queue_1";
+    public static final String TOPIC_QUEUE_1 = "topic.queue1";
     /**
      * 用于Topic模式交换机的队列 2
      */
-    public static final String TOPIC_QUEUE_2 = "topic_queue_2";
+    public static final String TOPIC_QUEUE_2 = "topic.queue2";
     /**
      * 用于Fanout模式交换机的队列 1
      */
-    public static final String FANOUT_QUEUE_1 = "fanout_queue_1";
+    public static final String FANOUT_QUEUE_1 = "fanout.queue1";
     /**
      * 用于Fanout模式交换机的队列 2
      */
-    public static final String FANOUT_QUEUE_2 = "fanout_queue_2";
+    public static final String FANOUT_QUEUE_2 = "fanout.queue2";
     /**
      * 用于Headers模式交换机的队列
      */
-    public static final String HEADERS_QUEUE = "headers_queue";
+    public static final String HEADERS_QUEUE = "headers.queue";
+    /**
+     * 用于 Miaosha 的队列
+     */
+    public static final String MIAOSHA_QUEUE = "miaosha.queue";
     
     //================================== 交换机常量 ==================================//
     /**
      * default 的交换机
      */
-    public static final String DEFAULT_EXCHANGE = "default_exchange";
+    public static final String DEFAULT_EXCHANGE = "default.exchange";
     /**
      * direct 模式交换机
      */
-    public static final String DIRECT_EXCHANGE = "direct_exchange";
+    public static final String DIRECT_EXCHANGE = "direct.exchange";
     /**
      * topic 模式交换机1
      */
-    public static final String TOPIC_EXCHANGE = "topic_exchange";
+    public static final String TOPIC_EXCHANGE = "topic.exchange";
     /**
      * fanout 模式交换机
      */
-    public static final String FANOUT_EXCHANGE = "fanout_exchange";
+    public static final String FANOUT_EXCHANGE = "fanout.exchange";
     /**
      * headers 模式交换机
      */
-    public static final String HEADERS_EXCHANGE = "headers_exchange";
+    public static final String HEADERS_EXCHANGE = "headers1exchange";
     
     //================================== 路由 key 常量 ==================================//
     /**
@@ -82,5 +86,9 @@ public class RabbitMqConstants {
      * headers key
      */
     public static final String ROUTING_KEY_HEADERS = "headers.key";
+    /**
+     * 用于 Miaosha 的路由 key
+     */
+    public static final String ROUTING_KEY_MIAOSHA = "miaosha.key";
     
 }

@@ -25,6 +25,10 @@ public enum ResultCode {
      * 注册成功
      */
     REGISTER_SUCCESSR(200200, "注册成功"),
+    /**
+     * 秒杀排队中
+     */
+    QUEUE_UP(300000, "秒杀排队中..."),
     
     //######################### 错误枚举 #########################//
     /**
@@ -71,32 +75,26 @@ public enum ResultCode {
      * 密码错误
      */
     WRONG_PASSWORD_ERROR(500305, "密码错误"),
-    
     /**
      * 商品错误
      */
     PRODUCT_ERROR(500400, "商品错误"),
-    
     /**
      * 订单错误
      */
     ORDER_ERROR(500500, "订单错误"),
-    
     /**
      * 秒杀错误
      */
     MIAOSHA_ERROR(500600, "秒杀错误"),
-    
     /**
      * 重复下单错误
      */
     ORDER_REPEAT_ERROR(500601, "重复下单错误"),
-    
     /**
      * 秒杀结束
      */
     MIAOSHA_OVER_ERROR(500602, "秒杀结束"),
-    
     /**
      * 秒杀错误
      */

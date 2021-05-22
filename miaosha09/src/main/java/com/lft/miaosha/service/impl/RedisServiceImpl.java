@@ -101,7 +101,7 @@ public class RedisServiceImpl implements RedisService {
      * @param keyPrefix
      * @param key
      * @param <T>
-     * @return
+     * @return 减少后的新值
      */
     public Long decr(KeyPrefix keyPrefix, String key) {
         Jedis jedis = null;

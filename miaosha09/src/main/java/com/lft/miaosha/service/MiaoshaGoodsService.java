@@ -2,6 +2,8 @@ package com.lft.miaosha.service;
 
 import com.lft.miaosha.entity.po.MiaoshaGoods;
 
+import java.util.List;
+
 /**
  * Class Name:      MiaoshaGoodsUService
  * Package Name:    com.lft.miaosha.service
@@ -17,4 +19,6 @@ public interface MiaoshaGoodsService {
     MiaoshaGoods getMiaoshaGoodsByGoodsId(Long goodsId);
     
     Integer reduceStock(MiaoshaGoods miaoshaGoods);
+    
+    List<MiaoshaGoods> getAllMiaoshaGoods();
 }

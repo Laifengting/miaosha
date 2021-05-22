@@ -120,6 +120,11 @@ public class RedisConstants {
      */
     public static final String GOODS_KEY_SUFFIX_GET_ALL_GOODSVOS = "get:all:goodsvos";
     
+    /**
+     * 根据 goodsId 获取端口的库存
+     */
+    public static final String GOODS_KEY_SUFFIX_GET_GOODS_STOCK_BY_GID = "get:goods:stock:by:gid";
+    
     //================================== 地址常量 ==================================//
     /**
      * 地址 id
@@ -152,7 +157,15 @@ public class RedisConstants {
      */
     public static final String MS_GOODS_KEY_SUFFIX_GET_MSGOODS_BY_UID_GID = "get:msgoods:by:uid:gid";
     
+    /**
+     * 标记 某个 gid 商品是否秒杀完
+     */
+    public static final String MS_GOODS_KEY_SUFFIX_IS_MSGOODS_SELL_OUT_BY_GID = "is:msgoods:sell:out:by:gid";
+    
     //================================== 秒杀订单常量 ==================================//
+    /**
+     * 通过userId goodsId 获取 MiaoshaOrder
+     */
     public static final String MS_ORDER_KEY_SUFFIX_GET_MSORDER_BY_UID_GID = "get:msorder:by:uid:gid";
     
 }

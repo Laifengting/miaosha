@@ -20,4 +20,5 @@ public interface OrderInfoService {
     OrderInfoVo addOrder(MiaoshaUser miaoshaUser, MiaoshaGoods miaoshaGoods);
     
     OrderInfo getOrderInfoById(Long orderId);
+    
 }

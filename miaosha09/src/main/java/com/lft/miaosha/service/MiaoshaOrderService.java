@@ -20,4 +20,6 @@ public interface MiaoshaOrderService {
     MiaoshaOrder getMiaoshaOrderByUserIdGoodsId(Long id, Long goodsId);
     
     OrderInfoVo miaosha(MiaoshaUser miaoshaUser, MiaoshaGoods miaoshaGoods);
+    
+    Long getMiaoshaResult(Long userId, Long goodsId);
 }

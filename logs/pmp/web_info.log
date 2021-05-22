@@ -1,0 +1,222 @@
+2021-05-22 23:10:57.957 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-05-22 23:10:57.959 [main] INFO  com.lft.miaosha.Miaosha09Application - Starting Miaosha09Application on 2020-LEE with PID 54596 (G:\WorkSpace\Java\IJCode\miaosha\miaosha09\target\classes started by Administrator in G:\WorkSpace\Java\IJCode\miaosha)
+2021-05-22 23:10:57.960 [main] INFO  com.lft.miaosha.Miaosha09Application - The following profiles are active: dev
+2021-05-22 23:10:58.420 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-05-22 23:10:58.422 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-05-22 23:10:58.440 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 10ms. Found 0 Redis repository interfaces.
+2021-05-22 23:10:58.731 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2021-05-22 23:10:58.736 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:10:58.736 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-05-22 23:10:58.736 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-22 23:10:58.798 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-05-22 23:10:58.798 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 811 ms
+2021-05-22 23:10:59.277 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2021-05-22 23:10:59.549 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-22 23:10:59.943 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:10:59.968 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-22 23:10:59.969 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [192.168.247.180:5672]
+2021-05-22 23:10:59.994 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#e9dc4d0:0/SimpleConnection@7741771e [delegate=amqp://guest@192.168.247.180:5672/, localPort= 12698]
+2021-05-22 23:11:00.064 [main] INFO  com.lft.miaosha.Miaosha09Application - Started Miaosha09Application in 2.358 seconds (JVM running for 3.365)
+2021-05-22 23:11:09.161 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-22 23:11:09.161 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2021-05-22 23:11:09.164 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2021-05-22 23:11:15.128 [http-nio-8080-exec-7] INFO  com.lft.miaosha.controller.RegisterController - 跳转到注册页面
+2021-05-22 23:12:23.501 [http-nio-8080-exec-6] INFO  com.lft.miaosha.controller.RegisterController - RegisterDto{mobile='13023573685', nickname='Laifengting', password='d3b1294a61a07da9b49b6e22b2cbd7f9'}
+2021-05-22 23:12:41.604 [http-nio-8080-exec-3] INFO  com.lft.miaosha.controller.LoginController - LoginDto{mobile=13023573685, password='d3b1294a61a07da9b49b6e22b2cbd7f9'}
+2021-05-22 23:13:41.204 [http-nio-8080-exec-2] INFO  com.lft.miaosha.controller.LoginController - LoginDto{mobile=13023573685, password='d3b1294a61a07da9b49b6e22b2cbd7f9'}
+2021-05-22 23:16:13.930 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-05-22 23:16:13.937 [main] INFO  com.lft.miaosha.Miaosha09Application - Starting Miaosha09Application on 2020-LEE with PID 23876 (G:\WorkSpace\Java\IJCode\miaosha\miaosha09\target\classes started by Administrator in G:\WorkSpace\Java\IJCode\miaosha)
+2021-05-22 23:16:13.938 [main] INFO  com.lft.miaosha.Miaosha09Application - The following profiles are active: dev
+2021-05-22 23:16:14.523 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-05-22 23:16:14.525 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-05-22 23:16:14.545 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 10ms. Found 0 Redis repository interfaces.
+2021-05-22 23:16:14.882 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2021-05-22 23:16:14.887 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:16:14.888 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-05-22 23:16:14.888 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-22 23:16:14.962 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-05-22 23:16:14.962 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 982 ms
+2021-05-22 23:16:15.568 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2021-05-22 23:16:15.842 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-22 23:16:16.300 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:16:16.318 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-22 23:16:16.320 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [192.168.247.180:5672]
+2021-05-22 23:16:16.356 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#20d19f2c:0/SimpleConnection@3cb04dd [delegate=amqp://guest@192.168.247.180:5672/, localPort= 12850]
+2021-05-22 23:16:16.421 [main] INFO  com.lft.miaosha.Miaosha09Application - Started Miaosha09Application in 2.99 seconds (JVM running for 4.233)
+2021-05-22 23:16:20.792 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-22 23:16:20.792 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2021-05-22 23:16:20.796 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2021-05-22 23:16:20.861 [http-nio-8080-exec-1] INFO  com.lft.miaosha.controller.LoginController - LoginDto{mobile=13023573685, password='d3b1294a61a07da9b49b6e22b2cbd7f9'}
+2021-05-22 23:17:15.788 [http-nio-8080-exec-9] INFO  com.lft.miaosha.controller.LoginController - LoginDto{mobile=13023573685, password='d3b1294a61a07da9b49b6e22b2cbd7f9'}
+2021-05-22 23:18:40.574 [SpringContextShutdownHook] INFO  o.s.a.r.listener.SimpleMessageListenerContainer - Waiting for workers to finish.
+2021-05-22 23:18:41.542 [SpringContextShutdownHook] INFO  o.s.a.r.listener.SimpleMessageListenerContainer - Successfully waited for workers to finish.
+2021-05-22 23:18:42.064 [SpringContextShutdownHook] INFO  o.s.a.r.listener.SimpleMessageListenerContainer - Shutdown ignored - container is not active already
+2021-05-22 23:18:42.065 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2021-05-22 23:18:42.071 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2021-05-22 23:18:42.075 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2021-05-22 23:21:43.142 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-05-22 23:21:43.148 [main] INFO  com.lft.miaosha.Miaosha09Application - Starting Miaosha09Application on 2020-LEE with PID 46104 (G:\WorkSpace\Java\IJCode\miaosha\miaosha09\target\classes started by Administrator in G:\WorkSpace\Java\IJCode\miaosha)
+2021-05-22 23:21:43.148 [main] INFO  com.lft.miaosha.Miaosha09Application - The following profiles are active: dev
+2021-05-22 23:21:43.682 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-05-22 23:21:43.684 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-05-22 23:21:43.704 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 10ms. Found 0 Redis repository interfaces.
+2021-05-22 23:21:44.050 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2021-05-22 23:21:44.056 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:21:44.056 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-05-22 23:21:44.057 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-22 23:21:44.127 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-05-22 23:21:44.127 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 947 ms
+2021-05-22 23:22:08.740 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2021-05-22 23:22:30.890 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-22 23:22:31.423 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:22:31.439 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-22 23:22:31.441 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [192.168.247.180:5672]
+2021-05-22 23:22:31.470 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#55e1192:0/SimpleConnection@7878bbdb [delegate=amqp://guest@192.168.247.180:5672/, localPort= 13029]
+2021-05-22 23:22:31.533 [main] INFO  com.lft.miaosha.Miaosha09Application - Started Miaosha09Application in 48.696 seconds (JVM running for 49.776)
+2021-05-22 23:22:34.573 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-22 23:22:34.573 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2021-05-22 23:22:34.577 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2021-05-22 23:22:39.451 [http-nio-8080-exec-5] INFO  com.lft.miaosha.controller.LoginController - LoginDto{mobile=13023573685, password='d3b1294a61a07da9b49b6e22b2cbd7f9'}
+2021-05-22 23:22:59.718 [http-nio-8080-exec-10] INFO  com.lft.miaosha.service.impl.MqSenderServiceImpl - Send Message : {"goodsId":5,"user":{"gmtCreated":1621696344000,"gmtLastLogin":1621696636000,"gmtModified":1621696636000,"head":"/img/default.jpeg","id":13023573685,"loginCount":5,"nickname":"Laifengting","password":"b7797cce01b4b131b433b6acf4add449","salt":"173ab483"}}
+2021-05-22 23:23:10.986 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-5] INFO  com.lft.miaosha.service.impl.MqReceiveServiceImpl - Receive  Msg : {"goodsId":5,"user":{"gmtCreated":1621696344000,"gmtLastLogin":1621696636000,"gmtModified":1621696636000,"head":"/img/default.jpeg","id":13023573685,"loginCount":5,"nickname":"Laifengting","password":"b7797cce01b4b131b433b6acf4add449","salt":"173ab483"}}
+2021-05-22 23:23:19.342 [SpringContextShutdownHook] INFO  o.s.a.r.listener.SimpleMessageListenerContainer - Waiting for workers to finish.
+2021-05-22 23:23:20.052 [SpringContextShutdownHook] INFO  o.s.a.r.listener.SimpleMessageListenerContainer - Successfully waited for workers to finish.
+2021-05-22 23:23:20.584 [SpringContextShutdownHook] INFO  o.s.a.r.listener.SimpleMessageListenerContainer - Shutdown ignored - container is not active already
+2021-05-22 23:23:20.585 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2021-05-22 23:23:20.592 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2021-05-22 23:23:20.596 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2021-05-22 23:24:34.465 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-05-22 23:24:34.468 [main] INFO  com.lft.miaosha.Miaosha09Application - Starting Miaosha09Application on 2020-LEE with PID 32344 (G:\WorkSpace\Java\IJCode\miaosha\miaosha09\target\classes started by Administrator in G:\WorkSpace\Java\IJCode\miaosha)
+2021-05-22 23:24:34.469 [main] INFO  com.lft.miaosha.Miaosha09Application - The following profiles are active: dev
+2021-05-22 23:24:35.019 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-05-22 23:24:35.020 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-05-22 23:24:35.039 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9ms. Found 0 Redis repository interfaces.
+2021-05-22 23:24:35.334 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2021-05-22 23:24:35.339 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:24:35.340 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-05-22 23:24:35.340 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-22 23:24:35.403 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-05-22 23:24:35.403 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 906 ms
+2021-05-22 23:24:35.866 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2021-05-22 23:24:36.074 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-22 23:24:36.450 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:24:36.462 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-22 23:24:36.464 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [192.168.247.180:5672]
+2021-05-22 23:24:36.489 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#2e060819:0/SimpleConnection@4c51077d [delegate=amqp://guest@192.168.247.180:5672/, localPort= 13081]
+2021-05-22 23:24:36.550 [main] INFO  com.lft.miaosha.Miaosha09Application - Started Miaosha09Application in 2.37 seconds (JVM running for 3.451)
+2021-05-22 23:25:09.794 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-22 23:25:09.794 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2021-05-22 23:25:09.797 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2021-05-22 23:25:27.015 [http-nio-8080-exec-1] INFO  com.lft.miaosha.controller.LoginController - LoginDto{mobile=13023573685, password='d3b1294a61a07da9b49b6e22b2cbd7f9'}
+2021-05-22 23:26:34.737 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-05-22 23:26:34.744 [main] INFO  com.lft.miaosha.Miaosha09Application - Starting Miaosha09Application on 2020-LEE with PID 22464 (G:\WorkSpace\Java\IJCode\miaosha\miaosha09\target\classes started by Administrator in G:\WorkSpace\Java\IJCode\miaosha)
+2021-05-22 23:26:34.744 [main] INFO  com.lft.miaosha.Miaosha09Application - The following profiles are active: dev
+2021-05-22 23:26:35.368 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-05-22 23:26:35.369 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-05-22 23:26:35.390 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 11ms. Found 0 Redis repository interfaces.
+2021-05-22 23:26:35.754 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2021-05-22 23:26:35.760 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:26:35.761 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-05-22 23:26:35.761 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-22 23:26:35.832 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-05-22 23:26:35.832 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1042 ms
+2021-05-22 23:26:56.707 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2021-05-22 23:26:56.961 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-22 23:26:57.423 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:26:57.439 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-22 23:26:57.441 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [192.168.247.180:5672]
+2021-05-22 23:26:57.469 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#7c5df615:0/SimpleConnection@25d0b918 [delegate=amqp://guest@192.168.247.180:5672/, localPort= 13135]
+2021-05-22 23:26:57.528 [main] INFO  com.lft.miaosha.Miaosha09Application - Started Miaosha09Application in 23.207 seconds (JVM running for 24.603)
+2021-05-22 23:27:02.997 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-22 23:27:02.997 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2021-05-22 23:27:03.001 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2021-05-22 23:27:03.068 [http-nio-8080-exec-1] INFO  com.lft.miaosha.controller.LoginController - LoginDto{mobile=13023573685, password='d3b1294a61a07da9b49b6e22b2cbd7f9'}
+2021-05-22 23:27:20.898 [http-nio-8080-exec-4] INFO  com.lft.miaosha.service.impl.MqSenderServiceImpl - Send Message : {"goodsId":5,"user":{"gmtCreated":1621696344000,"gmtLastLogin":1621697127000,"gmtModified":1621697127000,"head":"/img/default.jpeg","id":13023573685,"loginCount":7,"nickname":"Laifengting","password":"b7797cce01b4b131b433b6acf4add449","salt":"173ab483"}}
+2021-05-22 23:27:27.068 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] INFO  com.lft.miaosha.service.impl.MqReceiveServiceImpl - Receive  Msg : {"goodsId":5,"user":{"gmtCreated":1621696344000,"gmtLastLogin":1621697127000,"gmtModified":1621697127000,"head":"/img/default.jpeg","id":13023573685,"loginCount":7,"nickname":"Laifengting","password":"b7797cce01b4b131b433b6acf4add449","salt":"173ab483"}}
+2021-05-22 23:28:03.403 [SpringContextShutdownHook] INFO  o.s.a.r.listener.SimpleMessageListenerContainer - Waiting for workers to finish.
+2021-05-22 23:28:04.018 [SpringContextShutdownHook] INFO  o.s.a.r.listener.SimpleMessageListenerContainer - Successfully waited for workers to finish.
+2021-05-22 23:28:04.545 [SpringContextShutdownHook] INFO  o.s.a.r.listener.SimpleMessageListenerContainer - Shutdown ignored - container is not active already
+2021-05-22 23:28:04.545 [SpringContextShutdownHook] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Shutting down ExecutorService 'applicationTaskExecutor'
+2021-05-22 23:28:04.551 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+2021-05-22 23:28:04.555 [SpringContextShutdownHook] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+2021-05-22 23:28:08.901 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-05-22 23:28:08.905 [main] INFO  com.lft.miaosha.Miaosha09Application - Starting Miaosha09Application on 2020-LEE with PID 50964 (G:\WorkSpace\Java\IJCode\miaosha\miaosha09\target\classes started by Administrator in G:\WorkSpace\Java\IJCode\miaosha)
+2021-05-22 23:28:08.906 [main] INFO  com.lft.miaosha.Miaosha09Application - The following profiles are active: dev
+2021-05-22 23:28:09.444 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-05-22 23:28:09.445 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-05-22 23:28:09.465 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 10ms. Found 0 Redis repository interfaces.
+2021-05-22 23:28:09.795 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2021-05-22 23:28:09.800 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:28:09.801 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-05-22 23:28:09.801 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-22 23:28:09.865 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-05-22 23:28:09.865 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 930 ms
+2021-05-22 23:28:10.324 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2021-05-22 23:28:10.532 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-22 23:28:10.906 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:28:10.928 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-22 23:28:10.930 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [192.168.247.180:5672]
+2021-05-22 23:28:10.955 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#2184b4f4:0/SimpleConnection@2839e3c8 [delegate=amqp://guest@192.168.247.180:5672/, localPort= 13175]
+2021-05-22 23:28:11.004 [main] INFO  com.lft.miaosha.Miaosha09Application - Started Miaosha09Application in 2.386 seconds (JVM running for 3.498)
+2021-05-22 23:29:07.595 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-22 23:29:07.595 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2021-05-22 23:29:07.598 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2021-05-22 23:29:25.180 [http-nio-8080-exec-4] INFO  com.lft.miaosha.controller.LoginController - LoginDto{mobile=13023573685, password='d3b1294a61a07da9b49b6e22b2cbd7f9'}
+2021-05-22 23:33:36.475 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-05-22 23:33:36.479 [main] INFO  com.lft.miaosha.Miaosha09Application - Starting Miaosha09Application on 2020-LEE with PID 27000 (G:\WorkSpace\Java\IJCode\miaosha\miaosha09\target\classes started by Administrator in G:\WorkSpace\Java\IJCode\miaosha)
+2021-05-22 23:33:36.479 [main] INFO  com.lft.miaosha.Miaosha09Application - The following profiles are active: dev
+2021-05-22 23:33:36.980 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-05-22 23:33:36.981 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-05-22 23:33:37.004 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 12ms. Found 0 Redis repository interfaces.
+2021-05-22 23:33:37.317 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2021-05-22 23:33:37.322 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:33:37.322 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-05-22 23:33:37.322 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-22 23:33:37.389 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-05-22 23:33:37.389 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 882 ms
+2021-05-22 23:33:37.873 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2021-05-22 23:33:38.091 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-22 23:33:38.471 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:33:38.484 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-22 23:33:38.486 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [192.168.247.180:5672]
+2021-05-22 23:33:38.523 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#23eff5d1:0/SimpleConnection@183ade54 [delegate=amqp://guest@192.168.247.180:5672/, localPort= 13278]
+2021-05-22 23:33:38.544 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-22 23:33:38.544 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2021-05-22 23:33:38.548 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 4 ms
+2021-05-22 23:33:38.581 [main] INFO  com.lft.miaosha.Miaosha09Application - Started Miaosha09Application in 2.363 seconds (JVM running for 3.415)
+2021-05-22 23:33:57.928 [http-nio-8080-exec-5] INFO  com.lft.miaosha.controller.LoginController - LoginDto{mobile=13023573685, password='d3b1294a61a07da9b49b6e22b2cbd7f9'}
+2021-05-22 23:34:04.213 [http-nio-8080-exec-2] INFO  com.lft.miaosha.controller.MiaoshaOrderController - ==================== 查看是否有订单 ====================
+2021-05-22 23:34:04.218 [http-nio-8080-exec-2] INFO  com.lft.miaosha.controller.MiaoshaOrderController - ==================== 执行缓存中减库存 ====================
+2021-05-22 23:36:13.530 [http-nio-8080-exec-8] INFO  com.lft.miaosha.controller.MiaoshaOrderController - ==================== 查看是否有订单 ====================
+2021-05-22 23:36:13.531 [http-nio-8080-exec-8] INFO  com.lft.miaosha.controller.MiaoshaOrderController - ==================== 执行缓存中减库存 ====================
+2021-05-22 23:36:14.417 [http-nio-8080-exec-10] INFO  com.lft.miaosha.controller.MiaoshaOrderController - ==================== 查看是否有订单 ====================
+2021-05-22 23:36:14.418 [http-nio-8080-exec-10] INFO  com.lft.miaosha.controller.MiaoshaOrderController - ==================== 执行缓存中减库存 ====================
+2021-05-22 23:36:50.023 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.7.Final
+2021-05-22 23:36:50.027 [main] INFO  com.lft.miaosha.Miaosha09Application - Starting Miaosha09Application on 2020-LEE with PID 35068 (G:\WorkSpace\Java\IJCode\miaosha\miaosha09\target\classes started by Administrator in G:\WorkSpace\Java\IJCode\miaosha)
+2021-05-22 23:36:50.027 [main] INFO  com.lft.miaosha.Miaosha09Application - The following profiles are active: dev
+2021-05-22 23:36:50.548 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-05-22 23:36:50.549 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2021-05-22 23:36:50.568 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 9ms. Found 0 Redis repository interfaces.
+2021-05-22 23:36:50.864 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2021-05-22 23:36:50.869 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:36:50.869 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2021-05-22 23:36:50.870 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-05-22 23:36:50.931 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2021-05-22 23:36:50.932 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 876 ms
+2021-05-22 23:36:51.389 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2021-05-22 23:36:51.596 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-22 23:36:51.992 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2021-05-22 23:36:52.006 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2021-05-22 23:36:52.008 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Attempting to connect to: [192.168.247.180:5672]
+2021-05-22 23:36:52.047 [main] INFO  o.s.a.rabbit.connection.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#670d4d38:0/SimpleConnection@5d512ddb [delegate=amqp://guest@192.168.247.180:5672/, localPort= 13351]
+2021-05-22 23:36:52.101 [main] INFO  com.lft.miaosha.Miaosha09Application - Started Miaosha09Application in 2.397 seconds (JVM running for 3.647)
+2021-05-22 23:37:07.409 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-05-22 23:37:07.409 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2021-05-22 23:37:07.412 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2021-05-22 23:37:20.253 [http-nio-8080-exec-4] INFO  com.lft.miaosha.controller.LoginController - LoginDto{mobile=13023573685, password='d3b1294a61a07da9b49b6e22b2cbd7f9'}
+2021-05-22 23:37:27.369 [http-nio-8080-exec-7] INFO  com.lft.miaosha.controller.MiaoshaOrderController - ==================== 查看是否有订单 ====================
+2021-05-22 23:37:27.374 [http-nio-8080-exec-7] INFO  com.lft.miaosha.controller.MiaoshaOrderController - ==================== 执行缓存中减库存 ====================
+2021-05-22 23:37:27.374 [http-nio-8080-exec-7] INFO  com.lft.miaosha.controller.MiaoshaOrderController - ==================== 执行 RabbitMQ 入队 ====================
+2021-05-22 23:37:27.375 [http-nio-8080-exec-7] INFO  com.lft.miaosha.service.impl.MqSenderServiceImpl - Send Message : {"goodsId":5,"user":{"gmtCreated":1621696344000,"gmtLastLogin":1621697638000,"gmtModified":1621697638000,"head":"/img/default.jpeg","id":13023573685,"loginCount":10,"nickname":"Laifengting","password":"b7797cce01b4b131b433b6acf4add449","salt":"173ab483"}}
+2021-05-22 23:37:27.379 [http-nio-8080-exec-7] INFO  com.lft.miaosha.controller.MiaoshaOrderController - ==================== 返回排队中结果 ====================
+2021-05-22 23:37:27.385 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-8] INFO  com.lft.miaosha.service.impl.MqReceiveServiceImpl - Receive  Msg : {"goodsId":5,"user":{"gmtCreated":1621696344000,"gmtLastLogin":1621697638000,"gmtModified":1621697638000,"head":"/img/default.jpeg","id":13023573685,"loginCount":10,"nickname":"Laifengting","password":"b7797cce01b4b131b433b6acf4add449","salt":"173ab483"}}

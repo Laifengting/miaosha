@@ -1,23 +1,31 @@
 package com.lft.miaosha.controller;
 
+import com.lft.miaosha.common.key.impl.GoodsKeyPrefix;
 import com.lft.miaosha.common.result.R;
 import com.lft.miaosha.common.result.ResultCode;
+import com.lft.miaosha.entity.mo.MiaoshaMessageMo;
 import com.lft.miaosha.entity.po.MiaoshaGoods;
 import com.lft.miaosha.entity.po.MiaoshaOrder;
 import com.lft.miaosha.entity.po.MiaoshaUser;
-import com.lft.miaosha.entity.vo.GoodsVo;
-import com.lft.miaosha.entity.vo.OrderInfoVo;
 import com.lft.miaosha.service.GoodsService;
 import com.lft.miaosha.service.MiaoshaGoodsService;
 import com.lft.miaosha.service.MiaoshaOrderService;
+import com.lft.miaosha.service.MqSenderService;
+import com.lft.miaosha.service.RedisService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Class Name:      GoodsController
@@ -32,7 +40,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping ("miaosha")
-public class MiaoshaOrderController {
+public class MiaoshaOrderController implements InitializingBean {
+    private static Logger log = LoggerFactory.getLogger(MiaoshaOrderController.class);
     
     @Autowired
     private MiaoshaGoodsService miaoshaGoodsService;
@@ -40,47 +49,25 @@ public class MiaoshaOrderController {
     private MiaoshaOrderService miaoshaOrderService;
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private RedisService redisService;
+    @Autowired
+    private MqSenderService mqSenderService;
     
     /**
-     * JMeter 压测 5000*10
-     * QPS 296.4 个/s
-     * @param model
-     * @param miaoshaUser
-     * @param goodsId
-     * @return
+     * Spring Boot 初始化的时候 执行
+     * @throws Exception
      */
-    @RequestMapping ("do/miaosha")
-    @Transactional
-    public String doMiaosha(Model model, MiaoshaUser miaoshaUser, @RequestParam ("goodsId") Long goodsId) {
-        if (miaoshaUser == null) {
-            return "login";
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        List<MiaoshaGoods> miaoshaGoodsList = miaoshaGoodsService.getAllMiaoshaGoods();
+        if (miaoshaGoodsList == null) {
+            return;
         }
-        // 将用户添加到 model 属性中
-        model.addAttribute("user", miaoshaUser);
-        
-        // 获取商品库存
-        MiaoshaGoods miaoshaGoods = miaoshaGoodsService.getMiaoshaGoodsByGoodsId(goodsId);
-        Integer stockCount = miaoshaGoods.getStockCount();
-        if (stockCount <= 0) {
-            model.addAttribute("errmsg", ResultCode.NO_STOCK_ERROR.getMessage());
-            return "miaosha_fail";
+        for (MiaoshaGoods miaoshaGoods : miaoshaGoodsList) {
+            redisService
+                    .set(GoodsKeyPrefix.KEY_PREFIX_GET_GOODS_STOCK_BY_GID, "" + miaoshaGoods.getGoodsId(), miaoshaGoods.getStockCount());
         }
-        
-        // 判断是否已经秒杀到了
-        MiaoshaOrder order = miaoshaOrderService.getMiaoshaOrderByUserIdGoodsId(miaoshaUser.getId(), goodsId);
-        if (order != null) {
-            model.addAttribute("errmsg", ResultCode.ORDER_REPEAT_ERROR.getMessage());
-            return "miaosha_fail";
-        }
-        
-        // 执行秒杀
-        OrderInfoVo orderInfoVo = miaoshaOrderService.miaosha(miaoshaUser, miaoshaGoods);
-        
-        // 获取 GoodVO 详情
-        GoodsVo goodsVo = goodsService.getGoodsVoByGoodsId(miaoshaGoods.getGoodsId());
-        model.addAttribute("orderInfo", orderInfoVo);
-        model.addAttribute("goods", goodsVo);
-        return "order_detail";
     }
     
     /**
@@ -109,25 +96,56 @@ public class MiaoshaOrderController {
         // 将用户添加到 model 属性中
         model.addAttribute("user", miaoshaUser);
         
-        
-        // 获取商品库存
-        MiaoshaGoods miaoshaGoods = miaoshaGoodsService.getMiaoshaGoodsByGoodsId(goodsId);
-        Integer stockCount = miaoshaGoods.getStockCount();
-        if (stockCount <= 0) {
-            return R.ERROR().code(ResultCode.MIAOSHA_OVER_ERROR.getCode())
-                    .message(ResultCode.MIAOSHA_OVER_ERROR.getMessage());
-        }
-        
         // 判断是否已经秒杀到了
+        log.info("==================== 查看是否有订单 ====================");
         MiaoshaOrder order = miaoshaOrderService.getMiaoshaOrderByUserIdGoodsId(miaoshaUser.getId(), goodsId);
         if (order != null) {
             return R.ERROR().code(ResultCode.ORDER_REPEAT_ERROR.getCode())
                     .message(ResultCode.ORDER_REPEAT_ERROR.getMessage());
         }
         
-        // 执行秒杀
-        OrderInfoVo orderInfoVo = miaoshaOrderService.miaosha(miaoshaUser, miaoshaGoods);
+        log.info("==================== 执行缓存中减库存 ====================");
+        // 先将缓存中的库存减1
+        Long newStock = redisService.decr(GoodsKeyPrefix.KEY_PREFIX_GET_GOODS_STOCK_BY_GID, "" + goodsId);
+        if (newStock < 0) {
+            return R.ERROR().code(ResultCode.MIAOSHA_OVER_ERROR.getCode()).message(ResultCode.MIAOSHA_OVER_ERROR.getMessage());
+        }
         
-        return R.OK().data("orderId", orderInfoVo.getId());
+        // 入队
+        log.info("==================== 执行 RabbitMQ 入队 ====================");
+        MiaoshaMessageMo miaoshaMessageMo = new MiaoshaMessageMo();
+        miaoshaMessageMo.setUser(miaoshaUser);
+        miaoshaMessageMo.setGoodsId(goodsId);
+        mqSenderService.sendMiaoshaMessage(miaoshaMessageMo);
+        
+        // 返回排队中
+        log.info("==================== 返回排队中结果 ====================");
+        return R.OK().code(ResultCode.QUEUE_UP.getCode()).message(ResultCode.QUEUE_UP.getMessage());
+    }
+    
+    /**
+     * 轮询请求秒杀结果
+     * 返回 orderId 表示成功
+     * 返回 -1 表示秒杀失败
+     * 返回 0 表示排队中
+     * @param model
+     * @param miaoshaUser
+     * @param goodsId
+     * @return
+     */
+    @GetMapping ("get/miaosha/result")
+    @ResponseBody
+    public R getMiaoshaResult(Model model, MiaoshaUser miaoshaUser, @RequestParam ("goodsId") Long goodsId) {
+        if (miaoshaUser == null) {
+            return R.ERROR().code(ResultCode.LOGIN_ERROR.getCode())
+                    .message(ResultCode.LOGIN_ERROR.getMessage());
+        }
+        // 将用户添加到 model 属性中
+        model.addAttribute("user", miaoshaUser);
+        
+        // 判断是否已经秒杀到了
+        Long result = miaoshaOrderService.getMiaoshaResult(miaoshaUser.getId(), goodsId);
+        
+        return R.OK().data("result", result);
     }
 }
