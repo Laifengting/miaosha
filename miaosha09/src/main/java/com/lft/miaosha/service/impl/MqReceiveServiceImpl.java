@@ -50,7 +50,7 @@ public class MqReceiveServiceImpl implements MqReceiveService {
         Long goodsId = mm.getGoodsId();
         
         // 判断商品库存
-        log.info("==================== 队列中收到消息后，判断数据库中库存 ====================");
+        // log.info("==================== 队列中收到消息后，判断数据库中库存 ====================");
         MiaoshaGoods miaoshaGoods = miaoshaGoodsService.getMiaoshaGoodsByGoodsId(goodsId);
         Integer stockCount = miaoshaGoods.getStockCount();
         if (stockCount <= 0) {
@@ -58,14 +58,14 @@ public class MqReceiveServiceImpl implements MqReceiveService {
         }
         
         // 判断是否已经秒杀到了
-        log.info("==================== 队列中收到消息后，判断该用户该商品是否已经有订单 ====================");
+        // log.info("==================== 队列中收到消息后，判断该用户该商品是否已经有订单 ====================");
         MiaoshaOrder order = miaoshaOrderService.getMiaoshaOrderByUserIdGoodsId(user.getId(), goodsId);
         if (order != null) {
             return;
         }
         
         // 执行秒杀,生成 订单信息 和 秒杀订单
-        log.info("==================== 队列中收到消息后，执行秒杀 ====================");
+        // log.info("==================== 队列中收到消息后，执行秒杀 ====================");
         OrderInfoVo orderInfoVo = miaoshaOrderService.miaosha(user, miaoshaGoods);
         
     }

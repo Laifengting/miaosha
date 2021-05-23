@@ -17,7 +17,7 @@ import com.lft.miaosha.common.key.ExpireSeconds;
 public class OrderKeyPrefix extends BaseKeyPrefix {
     // 过期时间是7天
     public static OrderKeyPrefix KEY_PREFIX_GET_ORDERINFO_BY_OID =
-            new OrderKeyPrefix(ExpireSeconds.WEEK, RedisConstants.ORDER_KEY_SUFFIX_GET_ORDERINFO_BY_OID);
+            new OrderKeyPrefix(ExpireSeconds.MINUTE * 5, RedisConstants.ORDER_KEY_SUFFIX_GET_ORDERINFO_BY_OID);
     
     public OrderKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);

@@ -59,7 +59,7 @@ public class UserAndTokenUtils {
      */
     public static void insertIntoDb(List<MiaoshaUser> users) throws Exception {
         System.out.println("============ 准备开始插入用户到数据库 ============");
-        String url = "jdbc:mysql://192.168.247.180:3306/miaosha?allowMultiQueries=true&rewriteBatchedStatements=true&useUnicode=true" +
+        String url = "jdbc:mysql://192.168.56.188:3306/miaosha?allowMultiQueries=true&rewriteBatchedStatements=true&useUnicode=true" +
                 "&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false&nullCatalogMeansCurrent=true";
         String userName = "root";
         String password = "201314";
@@ -112,7 +112,9 @@ public class UserAndTokenUtils {
     public static void createTokenByLogin(List<MiaoshaUser> users) throws Exception {
         System.out.println("============ 准备开始创建Token ============");
         // 设置登录请求地址
-        String urlString = "http://192.168.247.180:8080/login/do/login";
+        // String urlString = "http://192.168.247.180:8080/login/do/login";
+        // String urlString = "http://localhost:8080/login/do/login";
+        String urlString = "http://192.168.56.188:8080/login/do/login";
         
         // 设置生成 token 的文件位置
         File file = new File("D:/token.txt");
@@ -129,30 +131,9 @@ public class UserAndTokenUtils {
         for (int i = 0; i < users.size(); i++) {
             MiaoshaUser user = users.get(i);
             
-            // URL url = new URL(urlString);
-            // HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            // conn.setRequestMethod("POST");
-            // conn.setDoOutput(true);
-            // OutputStream out = conn.getOutputStream();
-            // String params = "mobile=" + user.getId() + "&password=" + Md5Util.inputPassToFormPass("123456");
-            // out.write(params.getBytes());
-            // out.flush();
-            // InputStream inputStream = conn.getInputStream();
-            // ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            // byte[] buffer = new byte[2048];
-            // int length = 0;
-            // while ((length = inputStream.read(buffer)) >= 0) {
-            //     baos.write(buffer, 0, length);
-            // }
-            // inputStream.close();
-            // baos.close();
-            // String response = new String(baos.toByteArray());
-            
             Map<String, String> map = new HashMap<>();
             map.put("password", Md5Util.inputPassToFormPass("123456"));
             map.put("mobile", user.getId().toString());
-            
-            // System.out.println(map);
             
             // // 从 cookie 中获取 token
             // Map<String, Object> responseMap = HttpClientUtils.httpFormPost(urlString, map);
@@ -188,7 +169,7 @@ public class UserAndTokenUtils {
     }
     
     public static void main(String[] args) throws Exception {
-        List<MiaoshaUser> users = createUser(5000);
+        List<MiaoshaUser> users = createUser(4000);
         insertIntoDb(users);
         createTokenByLogin(users);
     }

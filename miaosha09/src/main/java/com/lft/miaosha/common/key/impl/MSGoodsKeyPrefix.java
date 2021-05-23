@@ -21,7 +21,7 @@ public class MSGoodsKeyPrefix extends BaseKeyPrefix {
     
     // 过期时间是1天
     public static MSGoodsKeyPrefix KEY_PREFIX_IS_MSGOODS_SELL_OUT_BY_GID =
-            new MSGoodsKeyPrefix(ExpireSeconds.DAY, RedisConstants.MS_GOODS_KEY_SUFFIX_IS_MSGOODS_SELL_OUT_BY_GID);
+            new MSGoodsKeyPrefix(ExpireSeconds.MINUTE * 5, RedisConstants.MS_GOODS_KEY_SUFFIX_IS_MSGOODS_SELL_OUT_BY_GID);
     
     private MSGoodsKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);

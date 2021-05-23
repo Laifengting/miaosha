@@ -12,5 +12,5 @@ package com.lft.miaosha.service;
  * @since JDK 8
  */
 public interface MqReceiveService {
-    public <T> void receiveMiaoshaMessage(String msg);
+    void receiveMiaoshaMessage(String msg);
 }

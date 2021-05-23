@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class Name:      GoodsController
@@ -42,6 +44,8 @@ import java.util.List;
 @RequestMapping ("miaosha")
 public class MiaoshaOrderController implements InitializingBean {
     private static Logger log = LoggerFactory.getLogger(MiaoshaOrderController.class);
+    
+    private Map<Long, Boolean> localOverMap = new HashMap<>();
     
     @Autowired
     private MiaoshaGoodsService miaoshaGoodsService;
@@ -67,14 +71,15 @@ public class MiaoshaOrderController implements InitializingBean {
         for (MiaoshaGoods miaoshaGoods : miaoshaGoodsList) {
             redisService
                     .set(GoodsKeyPrefix.KEY_PREFIX_GET_GOODS_STOCK_BY_GID, "" + miaoshaGoods.getGoodsId(), miaoshaGoods.getStockCount());
+            localOverMap.put(miaoshaGoods.getGoodsId(), false);
         }
     }
     
     /**
      * JMeter 压测 5000*10 三次
-     * QPS 1892.6 个/s
-     * QPS 1941.6 个/s
-     * QPS 1944.1 个/s
+     * QPS 5210.4 个/s
+     * QPS 5405.8 个/s
+     * QPS 5776.8 个/s
      * <p>
      * GET POST 有什么区别？
      * GET是从服务端请求数据，具有幂等性
@@ -96,30 +101,37 @@ public class MiaoshaOrderController implements InitializingBean {
         // 将用户添加到 model 属性中
         model.addAttribute("user", miaoshaUser);
         
+        // 内存标记，减少 Redis 访问
+        Boolean localOver = localOverMap.get(goodsId);
+        if (localOver) {
+            return R.ERROR().code(ResultCode.MIAOSHA_OVER_ERROR.getCode()).message(ResultCode.MIAOSHA_OVER_ERROR.getMessage());
+        }
+        
+        // log.info("==================== 执行缓存中减库存 ====================");
+        // 先将缓存中的库存减1
+        Long newStock = redisService.decr(GoodsKeyPrefix.KEY_PREFIX_GET_GOODS_STOCK_BY_GID, "" + goodsId);
+        if (newStock < 0) {
+            localOverMap.put(goodsId, true);
+            return R.ERROR().code(ResultCode.MIAOSHA_OVER_ERROR.getCode()).message(ResultCode.MIAOSHA_OVER_ERROR.getMessage());
+        }
+        
         // 判断是否已经秒杀到了
-        log.info("==================== 查看是否有订单 ====================");
+        // log.info("==================== 查看是否有订单 ====================");
         MiaoshaOrder order = miaoshaOrderService.getMiaoshaOrderByUserIdGoodsId(miaoshaUser.getId(), goodsId);
         if (order != null) {
             return R.ERROR().code(ResultCode.ORDER_REPEAT_ERROR.getCode())
                     .message(ResultCode.ORDER_REPEAT_ERROR.getMessage());
         }
         
-        log.info("==================== 执行缓存中减库存 ====================");
-        // 先将缓存中的库存减1
-        Long newStock = redisService.decr(GoodsKeyPrefix.KEY_PREFIX_GET_GOODS_STOCK_BY_GID, "" + goodsId);
-        if (newStock < 0) {
-            return R.ERROR().code(ResultCode.MIAOSHA_OVER_ERROR.getCode()).message(ResultCode.MIAOSHA_OVER_ERROR.getMessage());
-        }
-        
         // 入队
-        log.info("==================== 执行 RabbitMQ 入队 ====================");
+        // log.info("==================== 执行 RabbitMQ 入队 ====================");
         MiaoshaMessageMo miaoshaMessageMo = new MiaoshaMessageMo();
         miaoshaMessageMo.setUser(miaoshaUser);
         miaoshaMessageMo.setGoodsId(goodsId);
         mqSenderService.sendMiaoshaMessage(miaoshaMessageMo);
         
         // 返回排队中
-        log.info("==================== 返回排队中结果 ====================");
+        // log.info("==================== 返回排队中结果 ====================");
         return R.OK().code(ResultCode.QUEUE_UP.getCode()).message(ResultCode.QUEUE_UP.getMessage());
     }
     

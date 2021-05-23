@@ -17,10 +17,10 @@ import com.lft.miaosha.common.key.ExpireSeconds;
 public class AddressKeyPrefix extends BaseKeyPrefix {
     // 过期时间是永不过期
     public static AddressKeyPrefix KEY_PREFIX_GET_ADDRESS_BY_UID_AID =
-            new AddressKeyPrefix(ExpireSeconds.FOREVER, RedisConstants.ADDRESS_KEY_SUFFIX_GET_ADDRESS_BY_UID_AID);
+            new AddressKeyPrefix(ExpireSeconds.MINUTE * 5, RedisConstants.ADDRESS_KEY_SUFFIX_GET_ADDRESS_BY_UID_AID);
     
     public static AddressKeyPrefix KEY_PREFIX_GET_ALL_ADDRS_BY_UID =
-            new AddressKeyPrefix(ExpireSeconds.FOREVER, RedisConstants.ADDRESS_KEY_SUFFIX_GET_ALL_ADDRS_BY_UID);
+            new AddressKeyPrefix(ExpireSeconds.MINUTE * 5, RedisConstants.ADDRESS_KEY_SUFFIX_GET_ALL_ADDRS_BY_UID);
     
     private AddressKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);

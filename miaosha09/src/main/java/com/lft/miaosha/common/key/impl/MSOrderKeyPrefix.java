@@ -17,7 +17,7 @@ import com.lft.miaosha.common.key.ExpireSeconds;
 public class MSOrderKeyPrefix extends BaseKeyPrefix {
     // 过期时间是1天
     public static MSOrderKeyPrefix KEY_PREFIX_GET_MSORDER_BY_UID_GID =
-            new MSOrderKeyPrefix(ExpireSeconds.FOREVER, RedisConstants.MS_ORDER_KEY_SUFFIX_GET_MSORDER_BY_UID_GID);
+            new MSOrderKeyPrefix(ExpireSeconds.MINUTE * 5, RedisConstants.MS_ORDER_KEY_SUFFIX_GET_MSORDER_BY_UID_GID);
     
     private MSOrderKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);
