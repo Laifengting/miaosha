@@ -78,6 +78,11 @@ public class RedisConstants {
      */
     public static final String USER_KEY_SUFFIX_GET_USER_BY_TOKEN = "get:user:by:token";
     
+    /**
+     * 根据用户id和商品id 获取发送请求的次数
+     */
+    public static final String USER_KEY_SUFFIX_GET_URI_REQUEST_COUNT_BY_UID = "get:uri:rc:by:uid";
+    
     //================================== 订单常量 ==================================//
     /**
      * 订单号
@@ -120,11 +125,6 @@ public class RedisConstants {
      */
     public static final String GOODS_KEY_SUFFIX_GET_ALL_GOODSVOS = "get:all:goodsvos";
     
-    /**
-     * 根据 goodsId 获取端口的库存
-     */
-    public static final String GOODS_KEY_SUFFIX_GET_GOODS_STOCK_BY_GID = "get:goods:stock:by:gid";
-    
     //================================== 地址常量 ==================================//
     /**
      * 地址 id
@@ -146,21 +146,22 @@ public class RedisConstants {
      * 秒杀商品列表
      */
     public static final String MS_GOODS_KEY_SUFFIX_GOODS_ID = "ms:goods:id";
-    
     /**
-     *
+     * 根据商品id 获取 秒杀商品列表
      */
-    public static final String MS_GOODS_KEY_SUFFIX_GET_MSGOODS_BY_GID = "get:msgoodsList:by:gid";
-    
+    public static final String MS_GOODS_KEY_SUFFIX_GET_MSGOODS_BY_GID = "get:msgoods:by:gid";
     /**
      * 通过 userId 和 goodsId 获取 MiaoshaGoods
      */
     public static final String MS_GOODS_KEY_SUFFIX_GET_MSGOODS_BY_UID_GID = "get:msgoods:by:uid:gid";
-    
     /**
      * 标记 某个 gid 商品是否秒杀完
      */
     public static final String MS_GOODS_KEY_SUFFIX_IS_MSGOODS_SELL_OUT_BY_GID = "is:msgoods:sell:out:by:gid";
+    /**
+     * 根据 goodsId 获取秒杀商品的库存
+     */
+    public static final String GOODS_KEY_SUFFIX_GET_MSGOODS_STOCK_BY_GID = "get:msgoods:stock:by:gid";
     
     //================================== 秒杀订单常量 ==================================//
     /**

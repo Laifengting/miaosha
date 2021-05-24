@@ -1,7 +1,8 @@
 package com.lft.miaosha.controller;
 
+import com.lft.miaosha.annotation.AccessLimit;
 import com.lft.miaosha.common.constant.RedisConstants;
-import com.lft.miaosha.common.key.impl.GoodsKeyPrefix;
+import com.lft.miaosha.common.key.impl.MSGoodsKeyPrefix;
 import com.lft.miaosha.common.key.impl.MSOrderKeyPrefix;
 import com.lft.miaosha.common.result.R;
 import com.lft.miaosha.common.result.ResultCode;
@@ -32,6 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -79,7 +81,8 @@ public class MiaoshaOrderController implements InitializingBean {
         }
         for (MiaoshaGoods miaoshaGoods : miaoshaGoodsList) {
             redisService
-                    .set(GoodsKeyPrefix.KEY_PREFIX_GET_GOODS_STOCK_BY_GID, "" + miaoshaGoods.getGoodsId(), miaoshaGoods.getStockCount());
+                    .set(MSGoodsKeyPrefix.KEY_PREFIX_GET_MSGOODS_STOCK_BY_GID, "" + miaoshaGoods.getGoodsId(), miaoshaGoods
+                            .getStockCount());
             localOverMap.put(miaoshaGoods.getGoodsId(), false);
         }
     }
@@ -112,9 +115,8 @@ public class MiaoshaOrderController implements InitializingBean {
         
         // 验证 path
         Boolean check = miaoshaOrderService.checkPath(miaoshaUser, goodsId, path);
-        
         if (!check) {
-            return R.ERROR().code(ResultCode.MIAOSHA_OVER_ERROR.getCode()).message(ResultCode.MIAOSHA_OVER_ERROR.getMessage());
+            return R.ERROR().code(ResultCode.MIAOSHA_PATH_ERROR.getCode()).message(ResultCode.MIAOSHA_PATH_ERROR.getMessage());
         }
         
         // 内存标记，减少 Redis 访问
@@ -125,7 +127,7 @@ public class MiaoshaOrderController implements InitializingBean {
         
         // log.info("==================== 执行缓存中减库存 ====================");
         // 先将缓存中的库存减1
-        Long newStock = redisService.decr(GoodsKeyPrefix.KEY_PREFIX_GET_GOODS_STOCK_BY_GID, "" + goodsId);
+        Long newStock = redisService.decr(MSGoodsKeyPrefix.KEY_PREFIX_GET_MSGOODS_STOCK_BY_GID, "" + goodsId);
         if (newStock < 0) {
             localOverMap.put(goodsId, true);
             return R.ERROR().code(ResultCode.MIAOSHA_OVER_ERROR.getCode()).message(ResultCode.MIAOSHA_OVER_ERROR.getMessage());
@@ -161,6 +163,7 @@ public class MiaoshaOrderController implements InitializingBean {
      * @param goodsId
      * @return
      */
+    @AccessLimit (seconds = 5, maxCount = 10, loginRequired = true)
     @GetMapping ("get/miaosha/result")
     @ResponseBody
     public R getMiaoshaResult(Model model, MiaoshaUser miaoshaUser, @RequestParam ("goodsId") Long goodsId) {
@@ -177,14 +180,17 @@ public class MiaoshaOrderController implements InitializingBean {
         return R.OK().data("result", result);
     }
     
+    @AccessLimit (seconds = 5, maxCount = 1, loginRequired = true)
     @RequestMapping (value = "get/miaosha/path", method = RequestMethod.GET)
     @ResponseBody
     public R getMiaoshaPath(Model model, MiaoshaUser miaoshaUser, @RequestParam ("goodsId") Long goodsId,
-                            @RequestParam ("verifyCode") String verifyCode) {
+                            @RequestParam (value = "verifyCode", defaultValue = "0", required = false) String verifyCode,
+                            HttpServletRequest request) {
         if (miaoshaUser == null) {
             return R.ERROR().code(ResultCode.LOGIN_ERROR.getCode())
                     .message(ResultCode.LOGIN_ERROR.getMessage());
         }
+        
         // 校验验证码
         String verifyCodeFromCache = redisService
                 .get(MSOrderKeyPrefix.KEY_PREFIX_GET_VERIFYCODE_BY_UID_GID, "" + miaoshaUser
@@ -200,7 +206,6 @@ public class MiaoshaOrderController implements InitializingBean {
                     .message(ResultCode.MIAOSHAO_WRONG_VERIFY_CODE_ERROR.getMessage());
         }
         //
-        
         String str = Md5Util.md5(UuidUtil.getToken() + "0123456789");
         redisService.set(MSOrderKeyPrefix.KEY_PREFIX_GET_MSPATH_BY_GID, "" + miaoshaUser.getId() + RedisConstants.SPILT + goodsId, str);
         return R.OK().data("path", str);

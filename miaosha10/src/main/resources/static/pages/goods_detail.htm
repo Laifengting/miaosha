@@ -102,7 +102,11 @@
                     verifyCode: $("#verifyCode").val()
                 },
                 success: function (response) {
-                    doMiaosha(response.data.path);
+                    if (response.code == 200000) {
+                        doMiaosha(response.data.path);
+                    } else {
+                        layer.msg(response.msg);
+                    }
                 },
                 error: function () {
                     layer.msg("客户端请求有误");

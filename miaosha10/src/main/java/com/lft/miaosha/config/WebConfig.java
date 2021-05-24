@@ -1,5 +1,6 @@
 package com.lft.miaosha.config;
 
+import com.lft.miaosha.interceptor.AccessLimitInterceptor;
 import com.lft.miaosha.interceptor.CheckParamInterceptor;
 import com.lft.miaosha.resolver.GoodsIdArgumentResolver;
 import com.lft.miaosha.resolver.UserArgumentResolver;
@@ -32,6 +33,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Autowired
     CheckParamInterceptor checkParamInterceptor;
     
+    @Autowired
+    AccessLimitInterceptor accessLimitInterceptor;
+    
     /**
      * 添加参数解析器
      * @param argumentResolvers
@@ -49,6 +53,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 这个地方可以定义拦截器的具体的拦截路径
-        registry.addInterceptor(checkParamInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(accessLimitInterceptor).addPathPatterns("/**");
     }
 }

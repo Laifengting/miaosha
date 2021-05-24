@@ -22,10 +22,6 @@ public class GoodsKeyPrefix extends BaseKeyPrefix {
     public static GoodsKeyPrefix KEY_PREFIX_GET_ALL_GOODSVOS =
             new GoodsKeyPrefix(ExpireSeconds.MINUTE * 5, RedisConstants.GOODS_KEY_SUFFIX_GET_ALL_GOODSVOS);
     
-    // 过期时间是1周
-    public static GoodsKeyPrefix KEY_PREFIX_GET_GOODS_STOCK_BY_GID =
-            new GoodsKeyPrefix(ExpireSeconds.MINUTE * 5, RedisConstants.GOODS_KEY_SUFFIX_GET_GOODS_STOCK_BY_GID);
-    
     // 过期时间是1分钟
     public static GoodsKeyPrefix KEY_PREFIX_GET_HTML_FOR_GOODS_LIST =
             new GoodsKeyPrefix(ExpireSeconds.MINUTE * 5, RedisConstants.GOODS_KEY_SUFFIX_GET_HTML_FOR_GOODS_LIST);

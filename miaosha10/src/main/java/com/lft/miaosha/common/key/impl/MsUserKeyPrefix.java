@@ -22,11 +22,11 @@ public class MsUserKeyPrefix extends BaseKeyPrefix {
     public static MsUserKeyPrefix KEY_PREFIX_GET_USER_BY_TOKEN =
             new MsUserKeyPrefix(ExpireSeconds.WEEK, RedisConstants.USER_KEY_SUFFIX_GET_USER_BY_TOKEN);
     
-    private MsUserKeyPrefix(Integer expireSeconds, String prefix) {
+    public MsUserKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);
     }
     
-    private MsUserKeyPrefix(String prefix) {
+    public MsUserKeyPrefix(String prefix) {
         super(prefix);
     }
 }
