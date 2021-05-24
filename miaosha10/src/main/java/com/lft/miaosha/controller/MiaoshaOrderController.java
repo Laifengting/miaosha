@@ -1,8 +1,12 @@
 package com.lft.miaosha.controller;
 
+import com.lft.miaosha.common.constant.RedisConstants;
 import com.lft.miaosha.common.key.impl.GoodsKeyPrefix;
+import com.lft.miaosha.common.key.impl.MSOrderKeyPrefix;
 import com.lft.miaosha.common.result.R;
 import com.lft.miaosha.common.result.ResultCode;
+import com.lft.miaosha.common.util.Md5Util;
+import com.lft.miaosha.common.util.UuidUtil;
 import com.lft.miaosha.entity.mo.MiaoshaMessageMo;
 import com.lft.miaosha.entity.po.MiaoshaGoods;
 import com.lft.miaosha.entity.po.MiaoshaOrder;
@@ -20,11 +24,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,16 +99,23 @@ public class MiaoshaOrderController implements InitializingBean {
      * @param goodsId
      * @return
      */
-    @RequestMapping (value = "execute/miaosha", method = RequestMethod.POST)
+    @RequestMapping (value = "{path}/execute/miaosha", method = RequestMethod.POST)
     @ResponseBody
     @Transactional
-    public R doMiaosha2(Model model, MiaoshaUser miaoshaUser, @RequestParam ("goodsId") Long goodsId) {
+    public R doMiaosha2(Model model, MiaoshaUser miaoshaUser, @RequestParam ("goodsId") Long goodsId, @PathVariable ("path") String path) {
         if (miaoshaUser == null) {
             return R.ERROR().code(ResultCode.LOGIN_ERROR.getCode())
                     .message(ResultCode.LOGIN_ERROR.getMessage());
         }
         // 将用户添加到 model 属性中
         model.addAttribute("user", miaoshaUser);
+        
+        // 验证 path
+        Boolean check = miaoshaOrderService.checkPath(miaoshaUser, goodsId, path);
+        
+        if (!check) {
+            return R.ERROR().code(ResultCode.MIAOSHA_OVER_ERROR.getCode()).message(ResultCode.MIAOSHA_OVER_ERROR.getMessage());
+        }
         
         // 内存标记，减少 Redis 访问
         Boolean localOver = localOverMap.get(goodsId);
@@ -160,4 +176,54 @@ public class MiaoshaOrderController implements InitializingBean {
         
         return R.OK().data("result", result);
     }
+    
+    @RequestMapping (value = "get/miaosha/path", method = RequestMethod.GET)
+    @ResponseBody
+    public R getMiaoshaPath(Model model, MiaoshaUser miaoshaUser, @RequestParam ("goodsId") Long goodsId,
+                            @RequestParam ("verifyCode") String verifyCode) {
+        if (miaoshaUser == null) {
+            return R.ERROR().code(ResultCode.LOGIN_ERROR.getCode())
+                    .message(ResultCode.LOGIN_ERROR.getMessage());
+        }
+        // 校验验证码
+        String verifyCodeFromCache = redisService
+                .get(MSOrderKeyPrefix.KEY_PREFIX_GET_VERIFYCODE_BY_UID_GID, "" + miaoshaUser
+                        .getId() + RedisConstants.SPILT + goodsId, String.class);
+        // 验证码过期了
+        if (verifyCodeFromCache == null) {
+            return R.ERROR().code(ResultCode.MIAOSHAO_VERDUE_VERIFY_CODE_ERROR.getCode())
+                    .message(ResultCode.MIAOSHAO_VERDUE_VERIFY_CODE_ERROR.getMessage());
+        }
+        // 验证码错误
+        if (!verifyCodeFromCache.equals(verifyCode)) {
+            return R.ERROR().code(ResultCode.MIAOSHAO_WRONG_VERIFY_CODE_ERROR.getCode())
+                    .message(ResultCode.MIAOSHAO_WRONG_VERIFY_CODE_ERROR.getMessage());
+        }
+        //
+        
+        String str = Md5Util.md5(UuidUtil.getToken() + "0123456789");
+        redisService.set(MSOrderKeyPrefix.KEY_PREFIX_GET_MSPATH_BY_GID, "" + miaoshaUser.getId() + RedisConstants.SPILT + goodsId, str);
+        return R.OK().data("path", str);
+    }
+    
+    @RequestMapping (value = "get/verifyCode", method = RequestMethod.GET)
+    @ResponseBody
+    public R getVerifyCode(HttpServletResponse response, MiaoshaUser miaoshaUser, @RequestParam ("goodsId") Long goodsId) {
+        if (miaoshaUser == null) {
+            return R.ERROR().code(ResultCode.LOGIN_ERROR.getCode())
+                    .message(ResultCode.LOGIN_ERROR.getMessage());
+        }
+        ServletOutputStream outputStream = null;
+        try {
+            BufferedImage image = miaoshaOrderService.createMiaoshaVerifyCode(miaoshaUser, goodsId);
+            outputStream = response.getOutputStream();
+            ImageIO.write(image, "JPEG", outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
 }

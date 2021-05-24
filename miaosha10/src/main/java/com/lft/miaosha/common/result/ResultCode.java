@@ -96,6 +96,14 @@ public enum ResultCode {
      */
     MIAOSHA_OVER_ERROR(500602, "秒杀结束"),
     /**
+     * 验证码已经过期，请重新获取验证码
+     */
+    MIAOSHAO_VERDUE_VERIFY_CODE_ERROR(500603, "验证码已经过期，请重新获取验证码"),
+    /**
+     * 验证码输入错误，请重新输入验证码
+     */
+    MIAOSHAO_WRONG_VERIFY_CODE_ERROR(500604, "验证码错误，请重新输入验证码"),
+    /**
      * 秒杀错误
      */
     NO_STOCK_ERROR(500611, "库存不足错误");

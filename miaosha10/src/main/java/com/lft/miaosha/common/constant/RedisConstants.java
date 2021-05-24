@@ -168,4 +168,7 @@ public class RedisConstants {
      */
     public static final String MS_ORDER_KEY_SUFFIX_GET_MSORDER_BY_UID_GID = "get:msorder:by:uid:gid";
     
+    public static final String MS_ORDER_KEY_SUFFIX_GET_MSPATH_BY_GID = "get:mspath:by:gid";
+    
+    public static final String MS_ORDER_KEY_SUFFIX_GET_VERIFYCODE_BY_UID_GID = "get:vc:by:uid:gid";
 }

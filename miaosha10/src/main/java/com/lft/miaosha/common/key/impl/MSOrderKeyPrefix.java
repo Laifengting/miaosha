@@ -19,6 +19,14 @@ public class MSOrderKeyPrefix extends BaseKeyPrefix {
     public static MSOrderKeyPrefix KEY_PREFIX_GET_MSORDER_BY_UID_GID =
             new MSOrderKeyPrefix(ExpireSeconds.MINUTE * 5, RedisConstants.MS_ORDER_KEY_SUFFIX_GET_MSORDER_BY_UID_GID);
     
+    // 过期时间是1天
+    public static MSOrderKeyPrefix KEY_PREFIX_GET_MSPATH_BY_GID =
+            new MSOrderKeyPrefix(ExpireSeconds.MINUTE, RedisConstants.MS_ORDER_KEY_SUFFIX_GET_MSPATH_BY_GID);
+    
+    // 验证码过期时间是 10 分钟
+    public static MSOrderKeyPrefix KEY_PREFIX_GET_VERIFYCODE_BY_UID_GID =
+            new MSOrderKeyPrefix(ExpireSeconds.MINUTE * 10, RedisConstants.MS_ORDER_KEY_SUFFIX_GET_VERIFYCODE_BY_UID_GID);
+    
     private MSOrderKeyPrefix(Integer expireSeconds, String prefix) {
         super(expireSeconds, prefix);
     }

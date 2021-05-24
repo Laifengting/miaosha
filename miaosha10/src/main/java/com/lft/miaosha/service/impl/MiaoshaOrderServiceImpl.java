@@ -19,7 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Class Name:      OrderInfoServiceImpl
@@ -146,6 +151,94 @@ public class MiaoshaOrderServiceImpl implements MiaoshaOrderService {
                 // 没有卖完，表示在排列中，返回 0
                 return 0L;
             }
+        }
+    }
+    
+    @Override
+    public Boolean checkPath(MiaoshaUser miaoshaUser, Long goodsId, String path) {
+        if (miaoshaUser == null || path == null || goodsId <= 0) {
+            return false;
+        }
+        String pathFromRedis = redisService
+                .get(MSOrderKeyPrefix.KEY_PREFIX_GET_MSPATH_BY_GID, "" + miaoshaUser
+                        .getId() + RedisConstants.SPILT + goodsId, String.class);
+        return path.equals(pathFromRedis);
+    }
+    
+    @Override
+    public BufferedImage createMiaoshaVerifyCode(MiaoshaUser miaoshaUser, Long goodsId) {
+        if (miaoshaUser == null || goodsId <= 0) {
+            return null;
+        }
+        int width = 100;
+        int height = 32;
+        // 创建 image
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        // 获取图形
+        Graphics g = image.getGraphics();
+        
+        // 设置当前颜色
+        g.setColor(new Color(0xDCDCDC));
+        // 填充指定矩形（背景）
+        g.fillRect(0, 0, width, height);
+        // 设置当前颜色
+        g.setColor(Color.black);
+        g.drawRect(0, 0, width - 1, height - 1);
+        
+        // 创建一个随机对象
+        Random random = new Random();
+        
+        // 绘制干扰点
+        // 设置当前颜色
+        g.setColor(Color.white);
+        for (int i = 0; i < 50; i++) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            // 绘制椭圆形
+            g.drawOval(x, y, 0, 0);
+        }
+        
+        // 创建验证码
+        String verifyCode = createVerifyCode(random);
+        
+        String suffix = "=?";
+        // 设置当前颜色
+        g.setColor(new Color(0, 100, 0));
+        g.setFont(new Font("Candara", Font.BOLD, 24));
+        g.drawString(verifyCode + suffix, 8, 24);
+        g.dispose();
+        
+        // 把验证码保存到 缓存中
+        int rnd = calc(verifyCode);
+        redisService
+                .set(MSOrderKeyPrefix.KEY_PREFIX_GET_VERIFYCODE_BY_UID_GID, "" + miaoshaUser.getId() + RedisConstants.SPILT + goodsId, rnd);
+        return image;
+    }
+    
+    /**
+     * 创建验证码
+     * @param random
+     * @return
+     */
+    private String createVerifyCode(Random random) {
+        int num1 = random.nextInt(10);
+        int num2 = random.nextInt(10);
+        int num3 = random.nextInt(10);
+        char[] operatorList = {'+', '-', '*'};
+        char operator1 = operatorList[random.nextInt(3)];
+        char operator2 = operatorList[random.nextInt(3)];
+        return "" + num1 + operator1 + num2 + operator2 + num3;
+    }
+    
+    // 计算出验证码结果
+    private int calc(String exp) {
+        try {
+            ScriptEngineManager manager = new ScriptEngineManager();
+            ScriptEngine scriptEngine = manager.getEngineByName("JavaScript");
+            return (int) scriptEngine.eval(exp);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
         }
     }
     

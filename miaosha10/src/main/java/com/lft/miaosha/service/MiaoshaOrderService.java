@@ -5,6 +5,8 @@ import com.lft.miaosha.entity.po.MiaoshaOrder;
 import com.lft.miaosha.entity.po.MiaoshaUser;
 import com.lft.miaosha.entity.vo.OrderInfoVo;
 
+import java.awt.image.BufferedImage;
+
 /**
  * Class Name:      MiaoshaGoodsUService
  * Package Name:    com.lft.miaosha.service
@@ -22,4 +24,8 @@ public interface MiaoshaOrderService {
     OrderInfoVo miaosha(MiaoshaUser miaoshaUser, MiaoshaGoods miaoshaGoods);
     
     Long getMiaoshaResult(Long userId, Long goodsId);
+    
+    Boolean checkPath(MiaoshaUser miaoshaUser, Long goodsId, String path);
+    
+    BufferedImage createMiaoshaVerifyCode(MiaoshaUser miaoshaUser, Long goodsId);
 }
